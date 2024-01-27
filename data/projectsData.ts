@@ -7,6 +7,7 @@ interface ProjectDataProps {
   techStack: TechStack[]
 }
 
+// change deez
 const projectsData: ProjectDataProps[] = [
   {
     title: 'Corgi-AI: Create anything with AI',
