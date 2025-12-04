@@ -1,4 +1,4 @@
-const { withContentlayer } = require('next-contentlayer')
+const { withContentlayer } = require('next-contentlayer2')
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -54,29 +54,38 @@ const securityHeaders = [
   },
 ]
 
+// Enable static export for GitHub Pages / Contabo static hosting
+const isStaticExport = process.env.NEXT_EXPORT === 'true'
+
 /**
- * @type {import('next/dist/next-server/server/config').NextConfig}
+ * @type {import('next').NextConfig}
  **/
 module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    // Enable static export for GitHub Pages deployment
+    ...(isStaticExport && {
+      output: 'export',
+      trailingSlash: true,
+      images: {
+        unoptimized: true,
+      },
+    }),
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
-    images: {
-      domains: ['picsum.photos'],
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: '**',
-        },
-      ],
-    },
-    experimental: {
-      appDir: true,
-    },
+    ...(!isStaticExport && {
+      images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: '**',
+          },
+        ],
+      },
+    }),
     async headers() {
       return [
         {

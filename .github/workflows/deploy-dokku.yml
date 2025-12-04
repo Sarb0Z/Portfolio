@@ -1,0 +1,72 @@
+name: Deploy to Dokku (Contabo)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Dokku
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+
+      - name: Add Dokku Host to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.DOKKU_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to Dokku
+        run: |
+          git remote add dokku dokku@${{ secrets.DOKKU_HOST }}:${{ secrets.DOKKU_APP_NAME }}
+          git push dokku main:main --force
+
+      - name: Deployment Status
+        if: success()
+        run: echo "✅ Successfully deployed to Dokku on Contabo!"
+
+# =============================================================================
+# SETUP INSTRUCTIONS FOR DOKKU ON CONTABO
+# =============================================================================
+#
+# 1. SSH into your Contabo server and install Dokku:
+#    wget -NP . https://dokku.com/install/v0.34.8/bootstrap.sh
+#    sudo DOKKU_TAG=v0.34.8 bash bootstrap.sh
+#
+# 2. Create the application:
+#    dokku apps:create portfolio
+#
+# 3. Set environment variables:
+#    dokku config:set portfolio NEXT_UMAMI_ID=your_umami_id
+#    dokku config:set portfolio NEXT_PUBLIC_GISCUS_REPO=your_repo
+#    dokku config:set portfolio NEXT_PUBLIC_GISCUS_REPOSITORY_ID=your_repo_id
+#    dokku config:set portfolio NEXT_PUBLIC_GISCUS_CATEGORY=your_category
+#    dokku config:set portfolio NEXT_PUBLIC_GISCUS_CATEGORY_ID=your_category_id
+#
+# 4. Configure buildpacks (Node.js):
+#    dokku buildpacks:add portfolio https://github.com/heroku/heroku-buildpack-nodejs
+#
+# 5. Set the port:
+#    dokku proxy:ports-set portfolio http:80:3000
+#
+# 6. (Optional) Set up SSL with Let's Encrypt:
+#    sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+#    dokku letsencrypt:enable portfolio
+#
+# 7. Add your SSH public key to Dokku:
+#    cat ~/.ssh/id_rsa.pub | ssh root@your-server "sudo dokku ssh-keys:add admin"
+#
+# 8. Add the following secrets to your GitHub repository:
+#    - DOKKU_SSH_PRIVATE_KEY: Your SSH private key
+#    - DOKKU_HOST: Your Contabo server IP or domain
+#    - DOKKU_APP_NAME: portfolio (or your chosen app name)
+# =============================================================================
