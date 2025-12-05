@@ -11,7 +11,7 @@ interface ProjectDataProps {
 const projectsData: ProjectDataProps[] = [
   {
     title: 'Corgi-AI: Create anything with AI',
-    description: 
+    description:
       'Corgi AI is a collection of AI tools for different usecases. It includes a chatGPT clone with streaming responses, Image Generation, Audio Generation, Image Restoration and PDF Chat(beta). It is a full fledged SaaS application with stripe payments. It is Deployed using Docker with a VPS hosting on fly.io',
     href: 'https://corgi-ai.fly.dev',
     imgSrc: '/static/images/corgi-ai-dashboard.png',

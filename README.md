@@ -41,6 +41,7 @@ cp .env.example .env.local
 ```
 
 Required variables:
+
 - `NEXT_UMAMI_ID` - Umami analytics website ID
 - `NEXT_PUBLIC_GISCUS_*` - Giscus comments configuration
 
@@ -86,12 +87,12 @@ See `.github/workflows/deploy-dokku.yml` for detailed setup instructions.
 
 ## CI/CD Workflows
 
-| Workflow | Trigger | Description |
-|----------|---------|-------------|
-| `ci.yml` | PR, push | Lint, typecheck, build verification |
-| `deploy-vercel.yml` | push to main | Deploy to Vercel |
-| `deploy-gh-pages.yml` | push to main | Deploy to GitHub Pages |
-| `deploy-dokku.yml` | push to main | Deploy to Dokku/Contabo |
+| Workflow              | Trigger      | Description                         |
+| --------------------- | ------------ | ----------------------------------- |
+| `ci.yml`              | PR, push     | Lint, typecheck, build verification |
+| `deploy-vercel.yml`   | push to main | Deploy to Vercel                    |
+| `deploy-gh-pages.yml` | push to main | Deploy to GitHub Pages              |
+| `deploy-dokku.yml`    | push to main | Deploy to Dokku/Contabo             |
 
 ## Tech Stack
 

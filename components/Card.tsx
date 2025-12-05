@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import Image from './Image'
-import Link from './Link'
 import { DevIcons } from './DevIcons'
 
 const Card = ({ title, description, imgSrc, href, techStack }) => {
@@ -18,7 +17,7 @@ const Card = ({ title, description, imgSrc, href, techStack }) => {
   }
 
   return (
-    <a href={href} className="max-w-lg">
+    <div className="max-w-lg">
       <div className="flex flex-col h-full overflow-hidden rounded-xl border-2 p-[6px] border-zinc-300 hover:border-black dark:border-zinc-700 hover:dark:border-white/90">
         {imgSrc && (
           <div className="flex-shrink-0 object-none">
@@ -50,16 +49,16 @@ const Card = ({ title, description, imgSrc, href, techStack }) => {
           </div>
           <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">{title}</h2>
           <p className="prose max-w-none text-gray-500 dark:text-gray-400">{description}</p>
-          <Link
+          <a
             href={href}
             className="mt-auto text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             aria-label={`Link to ${title}`}
           >
             Learn more &rarr;
-          </Link>
+          </a>
         </div>
       </div>
-    </a>
+    </div>
   )
 }
 

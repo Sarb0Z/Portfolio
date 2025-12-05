@@ -17,6 +17,7 @@ You can check out the live demo here https://dall-e-sveltekit.vercel.app. It als
 **Note**: Auth.js is still experimental at the time of writing this article. So there might be some breaking changes in the future. But it reamins same for the most part.
 
 we will be using the following stack for this project.
+
 - SvelteKit
 - TypeScript
 - Prisma
@@ -33,6 +34,7 @@ First, we need to create a sveltekit project. We can do that by using the follow
 ```bash
 npm create svelte@latest my-app
 ```
+
 chose your preferred configuration and then add tailwindcss to the project using the below command.
 
 ```bash
@@ -46,11 +48,13 @@ npm install
 ```
 
 Now, we need to install shadcn-ui.
+
 ```bash
 npx shadcn-svelte@latest init
 ```
 
 You will be asked a few questions to configure
+
 ```bash
 Which style would you like to use? › Default
 Which color would you like to use as base color? › Slate
@@ -216,6 +220,7 @@ after that, we need to generate the prisma client. We can do that by using the f
 ```bash
 npx prisma generate
 ```
+
 The generate command generates assets like Prisma Client based on the generator and data model blocks defined in your `prisma/schema.prisma` file.
 The generate command is most often used to generate Prisma Client with the prisma-client-js generator.
 
@@ -244,7 +249,10 @@ npx prisma studio
 
 this will open a browser window with the prisma studio. you can see the tables there.
 
-<CImage src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*P1bMQdFe6FAkjkGlAJLE3g.png" caption="Prisma Studio models" />
+<CImage
+  src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*P1bMQdFe6FAkjkGlAJLE3g.png"
+  caption="Prisma Studio models"
+/>
 
 you can also see those tables in your database in my case it's vercel postgres. so i can open up my vercel and see the tables there.
 
@@ -292,9 +300,9 @@ NEXTAUTH_SECRET="58383abb3d6c7f7fb02eb71d97bd6dc7"
 ```
 
 Get Google and Github Client and Secret ID's
-to get google's Client and Secret ID, go to google developers console or follow [this](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) guide from google 
+to get google's Client and Secret ID, go to google developers console or follow [this](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) guide from google
 and for Github, it's pretty easy. just go to Github developers settings and under OAuth Apps, add a new app and follow the on-screen instructions.
-One thing to be clear is that, while testing in local environment, you homepage URL (or javascript origins in google) must be http://localhost:5173, replace `5173` with your port number where your app runs and callback URL (or redirect) should be 
+One thing to be clear is that, while testing in local environment, you homepage URL (or javascript origins in google) must be http://localhost:5173, replace `5173` with your port number where your app runs and callback URL (or redirect) should be
 http://localhost:xxxx/auth/callback/provider, replace provider with github and google in their respective consoles.
 
 we are almost done with the setup. Now on to the SvelteKit part where we will be creating the login and protected routes.
@@ -302,8 +310,9 @@ we are almost done with the setup. Now on to the SvelteKit part where we will be
 ## Creating Routes
 
 let's create following routes.
+
 - `/` - Home page
-- `/login` - Login page 
+- `/login` - Login page
 - `/dashboard` - Dashboard page (protected route)
 
 First, let's create Navbar where we will have login button and if users are logged in, we will show their name and profile picture.
@@ -312,7 +321,7 @@ create a file named `navbar.svelte` in `src/lib/components` directory and add th
 
 ```html:Navbar.svelte
 <script>
-  // src/lib/components/Navbar.svelte 
+  // src/lib/components/Navbar.svelte
   import * as Avatar from "$lib/components/ui/avatar";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import { page } from "$app/stores"; // we will get the session info from here
@@ -381,7 +390,7 @@ create a file named `navbar.svelte` in `src/lib/components` directory and add th
 ```
 
 add that `Navbar` component to `+layout.svelte` file in your root directory.
-    
+
 ```html:+layout.svelte
 <script>
   // src/routes/+layout.svelte
@@ -569,7 +578,7 @@ export const load: PageServerLoad = async (event) => {
 +	if (!session?.user) {
 +		throw redirect(303, `/login?redirectTo=${fromUrl}`);
 +    }
-    
+
 	return {
 		session,
 	};
@@ -582,11 +591,19 @@ you can use this code in any protected route where you want to redirect the user
 
 And that's it. we have successfully integrated Auth.js (NextAuth) and Prisma with SvelteKit. you can see the full code in my [github repo](https://github.com/PrabhuKiran8790/sveltekit-authjs-prisma-template.git).
 
-<CImage src="https://raw.githubusercontent.com/PrabhuKiran8790/sveltekit-authjs-prisma-template/main/static/login_page.png" caption="Login Page" />
+<CImage
+  src="https://raw.githubusercontent.com/PrabhuKiran8790/sveltekit-authjs-prisma-template/main/static/login_page.png"
+  caption="Login Page"
+/>
 
-<CImage src="https://raw.githubusercontent.com/PrabhuKiran8790/sveltekit-authjs-prisma-template/main/static/dashboard_page.png" caption="Dashboard Page" />
+<CImage
+  src="https://raw.githubusercontent.com/PrabhuKiran8790/sveltekit-authjs-prisma-template/main/static/dashboard_page.png"
+  caption="Dashboard Page"
+/>
 
-<CImage src="https://raw.githubusercontent.com/PrabhuKiran8790/sveltekit-authjs-prisma-template/main/static/prisma_studio.png" caption="Prisma Studio" />
-
+<CImage
+  src="https://raw.githubusercontent.com/PrabhuKiran8790/sveltekit-authjs-prisma-template/main/static/prisma_studio.png"
+  caption="Prisma Studio"
+/>
 
 Thanks for reading. If you have any questions, feel free to comment down below or reach out to me on linkedIN
