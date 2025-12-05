@@ -2,7 +2,6 @@
 
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/logo.svg'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
@@ -11,46 +10,62 @@ import { usePathname } from 'next/navigation'
 
 const Header = () => {
   const pathname = usePathname()
+  const openToWork = true
 
   return (
-    <div className="mt-3">
-      <header className="flex items-center justify-between shadow-md p-2 md:p-4 mb-8 bg-zinc-200/90 dark:bg-zinc-700/40 rounded-lg transition-colors duration-100">
-        <div>
-          <Link href="/" aria-label={siteMetadata.headerTitle}>
-            <div className="flex items-center justify-between">
-              <div className="mr-3">
-                <Logo />
-              </div>
-              {typeof siteMetadata.headerTitle === 'string' ? (
-                <div className="hidden h-6 text-2xl font-semibold sm:block -mt-2">
-                  {siteMetadata.headerTitle}
-                </div>
-              ) : (
-                siteMetadata.headerTitle
-              )}
-            </div>
+    <nav className="z-50 top-0 left-0 right-0 h-14 md:h-[4.1rem] border-b fixed supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60 w-full bg-white/95 dark:bg-gray-950/95 backdrop-blur hidden md:block">
+      <div className="flex items-center justify-between h-full p-4 max-w-[95rem] mx-auto">
+        <div className="flex items-center gap-4">
+          <Link
+            href="/"
+            aria-label={siteMetadata.headerTitle}
+            className="text-3xl font-semibold tracking-wider md:text-4xl font-fuggles"
+          >
+            <span className="text-5xl text-transparent bg-gradient-to-r from-primary-500 to-gray-400 bg-clip-text md:text-6xl">
+              S
+            </span>
+            arbz
           </Link>
+          {openToWork && (
+            <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-xl px-2 gap-3">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500" />
+              </span>
+              <a href={`mailto:${siteMetadata.email}`} className="text-sm">
+                Open to work
+              </a>
+            </div>
+          )}
         </div>
-        <div className="flex items-center leading-5 space-x-4 sm:space-x-4">
-          {headerNavLinks
-            .filter((link) => link.href !== '/')
-            .map((link) => (
-              <Link
-                key={link.title}
-                href={link.href}
-                className={`hidden sm:block p-2 text-black font-extrabold text-lg dark:text-gray-100 hover:bg-gray-400/50 hover:dark:bg-zinc-700 hover:rounded-md ${
-                  pathname.startsWith(link.href) ? 'bg-gray-400/50 dark:bg-zinc-700 rounded-md' : ''
-                }`}
-              >
-                {link.title}
-              </Link>
-            ))}
-          <SearchButton />
-          <ThemeSwitch />
-          <MobileNav />
+        <div className="hidden md:block">
+          <div className="flex space-x-4 items-center">
+            <ul className="flex items-center">
+              {headerNavLinks
+                .filter((link) => link.href !== '/')
+                .map((link) => (
+                  <li key={link.title}>
+                    <Link
+                      href={link.href}
+                      className="relative inline-block px-3 py-1 text-lg tracking-wider rounded-lg group hover:bg-gray-200 dark:hover:bg-gray-800"
+                    >
+                      <span
+                        className={`absolute rounded-full -bottom-1 left-1/2 transform -translate-x-1/2 w-4 h-[3px] bg-black dark:bg-white opacity-0 group-hover:opacity-100 transition-opacity ${
+                          pathname.startsWith(link.href) ? 'opacity-100' : ''
+                        }`}
+                      />
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+            <SearchButton />
+            <ThemeSwitch />
+          </div>
         </div>
-      </header>
-    </div>
+      </div>
+      <MobileNav />
+    </nav>
   )
 }
 

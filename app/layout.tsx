@@ -1,7 +1,7 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
-import { Space_Grotesk } from 'next/font/google'
+import { Space_Grotesk, Fuggles } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
@@ -16,6 +16,13 @@ const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-space-grotesk',
+})
+
+const fuggles = Fuggles({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-fuggles',
 })
 
 export const metadata: Metadata = {
@@ -62,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang={siteMetadata.language}
-      className={`${space_grotesk.variable} scroll-smooth`}
+      className={`${space_grotesk.variable} ${fuggles.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
@@ -77,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-white/90 text-black antialiased dark:bg-[#1B1B1B] dark:text-white transition-colors duration-200">
         <ThemeProviders>
           <SectionContainer>
-            <div className="flex h-screen flex-col justify-between font-sans">
+            <div className="flex h-screen flex-col justify-between font-sans pt-14 md:pt-[4.1rem]">
               <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                 <Header />
                 <main className="mb-auto">{children}</main>

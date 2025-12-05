@@ -24,6 +24,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-space-grotesk)', ...fontFamily.sans],
+        fuggles: ['var(--font-fuggles)', 'cursive'],
       },
       colors: {
         primary: colors.blue,
