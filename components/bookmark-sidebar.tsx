@@ -57,9 +57,7 @@ export const BookmarkSidebar = ({ bookmarks, className }: BookmarkSidebarProps) 
                     <span
                       className={cn(
                         'text-xs',
-                        isActive
-                          ? 'text-white/80'
-                          : 'text-gray-500 dark:text-gray-400'
+                        isActive ? 'text-white/80' : 'text-gray-500 dark:text-gray-400'
                       )}
                     >
                       {bookmark.count} {bookmark.count === 1 ? 'bookmark' : 'bookmarks'}

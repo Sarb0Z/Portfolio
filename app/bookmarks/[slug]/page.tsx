@@ -54,16 +54,17 @@ export default async function CollectionPage({ params }: PageProps) {
     <ScrollArea className="h-full bg-white dark:bg-gray-950" useScrollAreaId>
       {/* Mobile header - hidden on desktop since we have sidebar */}
       <FloatingHeader scrollTitle={currentBookmark.title} goBackLink="/bookmarks" />
-      
+
       <div className="@container p-4 md:p-6 lg:p-8">
         {/* Page title - visible on all sizes but styled differently */}
         <div className="mb-6 lg:mb-8">
           <PageTitle title={currentBookmark.title} className="text-xl lg:text-2xl" />
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            {currentBookmark.count} {currentBookmark.count === 1 ? 'bookmark' : 'bookmarks'} in this collection
+            {currentBookmark.count} {currentBookmark.count === 1 ? 'bookmark' : 'bookmarks'} in this
+            collection
           </p>
         </div>
-        
+
         <Suspense fallback={<ScreenLoadingSpinner />}>
           <BookmarkList id={currentBookmark._id} initialData={bookmarkItems} />
         </Suspense>

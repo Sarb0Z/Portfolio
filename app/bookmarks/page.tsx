@@ -56,9 +56,7 @@ export default async function BookmarksPage() {
           <div className="mb-6 rounded-full bg-primary-100 p-4 dark:bg-primary-900/30">
             <BookmarkIcon size={32} className="text-primary-600 dark:text-primary-400" />
           </div>
-          <h1 className="mb-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
-            My Bookmarks
-          </h1>
+          <h1 className="mb-2 text-2xl font-bold text-gray-900 dark:text-gray-100">My Bookmarks</h1>
           <p className="mb-6 text-gray-600 dark:text-gray-400">
             A curated collection of useful resources, articles, and tools I&apos;ve discovered.
           </p>

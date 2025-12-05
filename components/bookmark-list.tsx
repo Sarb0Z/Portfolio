@@ -59,10 +59,7 @@ export const BookmarkList = ({ initialData, id }: BookmarkListProps) => {
 
   const memoizedBookmarks = useMemo(() => {
     return data.map((bookmark, bookmarkIndex) => (
-      <div
-        key={`bookmark_${bookmarkIndex}`}
-        className={cn('grid gap-4', 'place-content-start')}
-      >
+      <div key={`bookmark_${bookmarkIndex}`} className={cn('grid gap-4', 'place-content-start')}>
         <BookmarkCard key={bookmark._id} bookmark={bookmark} order={bookmarkIndex} />
       </div>
     ))
@@ -70,10 +67,7 @@ export const BookmarkList = ({ initialData, id }: BookmarkListProps) => {
 
   const memoizedChunks = useMemo(() => {
     return chunks.map((chunk, chunkIndex) => (
-      <div
-        key={`chunk_${chunkIndex}`}
-        className={cn('grid gap-4', 'place-content-start')}
-      >
+      <div key={`chunk_${chunkIndex}`} className={cn('grid gap-4', 'place-content-start')}>
         {chunk.map((bookmark, bookmarkIndex) => (
           <BookmarkCard key={bookmark._id} bookmark={bookmark} order={bookmarkIndex} />
         ))}
