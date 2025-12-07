@@ -7,19 +7,17 @@ const siteMetadata = {
   language: 'en-us',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://prabhukirankonda.vercel.app',
-  siteRepo: 'https://github.com/PrabhuKiran8790/prabhukirankonda',
+  siteRepo: 'https://github.com/Sarb0z/Portfolio',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
   email: 'prabhukiran426@gmail.com',
-  github: 'https://github.com/PrabhuKiran8790',
-  twitter: 'https://twitter.com/prabhukirantwt',
-  linkedin: 'https://www.linkedin.com/in/prabhukirankonda',
+  github: 'https://github.com/Sarb0z',
+  linkedin: 'https://www.linkedin.com/in/abdul-rafay-zahid',
   locale: 'en-US',
   socialLinks: {
-    github: 'https://www.github.com/prabhukiran8790',
-    linkedin: 'https://www.linkedin.com/in/prabhukirankonda',
-    twitter: 'https://twitter.com/prabhukirantwt',
-    mail: 'mailto:prabhukiran426@gmail.com',
+    github: 'https://www.github.com/Sarb0z',
+    linkedin: 'https://www.linkedin.com/in/abdul-rafay-zahid',
+    mail: 'mailto:abdulrafay972@gmail.com',
   },
   analytics: {
     // If you want to use an analytics provider you have to add it to the

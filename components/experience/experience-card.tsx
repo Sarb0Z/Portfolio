@@ -102,16 +102,16 @@ export function ExperienceCard({ experience, position, index }: ExperienceCardPr
           'shadow-glow-md hover:shadow-glow-lg transition-shadow duration-300'
         )}
       >
-        {/* Type badge */}
+        {/* Type badge with gradient */}
         <div
           className={cn(
-            'absolute -top-3 px-3 py-1 rounded-full text-xs font-medium',
-            config.badgeColor,
-            config.textColor,
-            'border border-current/30'
+            'absolute -top-3 left-4 px-3 py-1.5 rounded-full text-xs font-semibold',
+            config.badgeGradient,
+            'text-white shadow-lg',
+            'border border-white/20'
           )}
         >
-          {config.label}
+          <span className="drop-shadow-sm">{config.label}</span>
         </div>
 
         {/* Header */}

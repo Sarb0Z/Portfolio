@@ -6,6 +6,8 @@ import { ExperienceCard } from './experience-card'
 import experienceData from '@/data/experienceData'
 
 export function ExperienceTimeline() {
+  const experienceTypes = experienceData.map((exp) => exp.type)
+
   return (
     <div className="relative min-h-screen">
       {/* Galaxy background - fixed, behind everything */}
@@ -15,13 +17,13 @@ export function ExperienceTimeline() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
         {/* Timeline path - hidden on mobile, visible on md+ */}
         <div className="hidden md:block">
-          <TimelinePath experienceCount={experienceData.length} />
+          <TimelinePath experienceCount={experienceData.length} experienceTypes={experienceTypes} />
         </div>
 
         {/* Experience cards */}
-        <div className="relative space-y-16 md:space-y-24">
+        <div className="relative space-y-32 md:space-y-48">
           {experienceData.map((experience, index) => (
-            <div key={experience.id} className="md:grid md:grid-cols-2 md:gap-16">
+            <div key={experience.id} className="md:grid md:grid-cols-2 md:gap-16 snap-center">
               {/* Left side */}
               {index % 2 === 0 ? (
                 <>

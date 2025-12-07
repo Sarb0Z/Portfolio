@@ -27,6 +27,7 @@ export const experienceTypeConfig: Record<
   {
     label: string
     badgeColor: string // Tailwind bg class
+    badgeGradient: string // Gradient class for the badge
     accentColor: string // Tailwind border/glow class
     textColor: string // Tailwind text class
     icon?: string // Optional icon identifier
@@ -36,30 +37,35 @@ export const experienceTypeConfig: Record<
   'full-time': {
     label: 'Full-time',
     badgeColor: 'bg-emerald-500/20',
+    badgeGradient: 'bg-gradient-to-r from-emerald-500 to-emerald-300',
     accentColor: 'border-emerald-500/50',
     textColor: 'text-emerald-400',
   },
   'part-time': {
     label: 'Part-time',
     badgeColor: 'bg-amber-500/20',
+    badgeGradient: 'bg-gradient-to-r from-amber-500 to-amber-300',
     accentColor: 'border-amber-500/50',
     textColor: 'text-amber-400',
   },
   internship: {
     label: 'Internship',
     badgeColor: 'bg-violet-500/20',
+    badgeGradient: 'bg-gradient-to-r from-violet-500 to-violet-300',
     accentColor: 'border-violet-500/50',
     textColor: 'text-violet-400',
   },
   contract: {
     label: 'Contract',
     badgeColor: 'bg-cyan-500/20',
+    badgeGradient: 'bg-gradient-to-r from-cyan-500 to-cyan-300',
     accentColor: 'border-cyan-500/50',
     textColor: 'text-cyan-400',
   },
   remote: {
     label: 'Remote',
     badgeColor: 'bg-sky-500/20',
+    badgeGradient: 'bg-gradient-to-r from-sky-500 to-sky-300',
     accentColor: 'border-sky-500/50',
     textColor: 'text-sky-400',
     icon: 'globe', // Shows globe icon overlay
@@ -68,6 +74,7 @@ export const experienceTypeConfig: Record<
   'personal-project': {
     label: 'Personal Project',
     badgeColor: 'bg-pink-500/20',
+    badgeGradient: 'bg-gradient-to-r from-pink-500 to-pink-300',
     accentColor: 'border-pink-500/50',
     textColor: 'text-pink-400',
     icon: 'rocket',
@@ -75,6 +82,7 @@ export const experienceTypeConfig: Record<
   'open-source': {
     label: 'Open Source',
     badgeColor: 'bg-orange-500/20',
+    badgeGradient: 'bg-gradient-to-r from-orange-500 to-orange-300',
     accentColor: 'border-orange-500/50',
     textColor: 'text-orange-400',
     icon: 'github',
@@ -82,6 +90,7 @@ export const experienceTypeConfig: Record<
   volunteer: {
     label: 'Volunteer',
     badgeColor: 'bg-rose-500/20',
+    badgeGradient: 'bg-gradient-to-r from-rose-500 to-rose-300',
     accentColor: 'border-rose-500/50',
     textColor: 'text-rose-400',
     icon: 'heart',
@@ -89,6 +98,7 @@ export const experienceTypeConfig: Record<
   education: {
     label: 'Education',
     badgeColor: 'bg-indigo-500/20',
+    badgeGradient: 'bg-gradient-to-r from-indigo-500 to-indigo-300',
     accentColor: 'border-indigo-500/50',
     textColor: 'text-indigo-400',
     icon: 'graduation-cap',

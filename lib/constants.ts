@@ -4,7 +4,8 @@
 // },
 
 export const COLLECTION_IDS: number[] = [
-  63965223
+  63965223,
+  64055696
 ]
 
 
