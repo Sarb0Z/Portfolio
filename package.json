@@ -81,5 +81,8 @@
       "prettier --write"
     ]
   },
+  "resolutions": {
+    "whatwg-url": "^7.0.0"
+  },
   "packageManager": "yarn@3.6.1"
 }
