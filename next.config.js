@@ -57,6 +57,10 @@ const securityHeaders = [
 // Enable static export for GitHub Pages / Contabo static hosting
 const isStaticExport = process.env.NEXT_EXPORT === 'true'
 
+// For GitHub Pages project sites (username.github.io/repo-name), set basePath
+// Leave empty for custom domains or user pages (username.github.io)
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
 /**
  * @type {import('next').NextConfig}
  **/
@@ -69,6 +73,8 @@ module.exports = () => {
     ...(isStaticExport && {
       output: 'export',
       trailingSlash: true,
+      basePath: basePath,
+      assetPrefix: basePath,
       images: {
         unoptimized: true,
       },

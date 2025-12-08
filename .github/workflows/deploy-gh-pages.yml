@@ -38,11 +38,15 @@ jobs:
       - name: Build static export
         run: yarn build:static
         env:
+          NEXT_PUBLIC_BASE_PATH: /Portfolio
           NEXT_UMAMI_ID: ${{ secrets.NEXT_UMAMI_ID }}
           NEXT_PUBLIC_GISCUS_REPO: ${{ secrets.NEXT_PUBLIC_GISCUS_REPO }}
           NEXT_PUBLIC_GISCUS_REPOSITORY_ID: ${{ secrets.NEXT_PUBLIC_GISCUS_REPOSITORY_ID }}
           NEXT_PUBLIC_GISCUS_CATEGORY: ${{ secrets.NEXT_PUBLIC_GISCUS_CATEGORY }}
           NEXT_PUBLIC_GISCUS_CATEGORY_ID: ${{ secrets.NEXT_PUBLIC_GISCUS_CATEGORY_ID }}
+
+      - name: Add .nojekyll file
+        run: touch ./out/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
