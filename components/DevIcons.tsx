@@ -819,6 +819,36 @@ export function TailwindCSSIcon() {
   )
 }
 
+export function SFMLIcon() {
+  return (
+    <svg viewBox="0 0 128 128" height={22} width={22}>
+      <circle cx="64" cy="64" r="60" fill="#8CC63F" />
+      <text
+        x="64"
+        y="78"
+        textAnchor="middle"
+        fill="#FFFFFF"
+        fontSize="36"
+        fontFamily="Arial, sans-serif"
+        fontWeight="bold"
+      >
+        SFML
+      </text>
+    </svg>
+  )
+}
+
+export function VisualStudioIcon() {
+  return (
+    <svg viewBox="0 0 128 128" height={22} width={22}>
+      <path
+        fill="#68217A"
+        d="M95 2.3l30.5 12.3v98.7l-30.6 12.4-49-37.6-27.3 20.3L2.5 100V28l16.1-8.2 27.3 20.3zm-2.5 18.7L53.6 64l38.9 43V21z"
+      />
+    </svg>
+  )
+}
+
 export const DevIcons: Record<string, React.ComponentType> = {
   Python: PythonIcon,
   Java: Java,
@@ -859,6 +889,8 @@ export const DevIcons: Record<string, React.ComponentType> = {
   AWS: AWSIcon,
   GCP: GCPIcon,
   TailwindCSS: TailwindCSSIcon,
+  SFML: SFMLIcon,
+  VisualStudio: VisualStudioIcon,
 }
 
 export function FamiliarTechStack() {

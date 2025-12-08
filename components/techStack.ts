@@ -32,11 +32,13 @@ export type TechStack =
   | 'PyTorch'
   | 'React'
   | 'Redis'
+  | 'SFML'
   | 'Streamlit'
   | 'Svelte'
   | 'TailwindCSS'
   | 'TensorFlow'
   | 'TypeScript'
+  | 'VisualStudio'
 
 export const techStack: TechStack[] = [
   'AWS',
@@ -72,9 +74,11 @@ export const techStack: TechStack[] = [
   'PyTorch',
   'React',
   'Redis',
+  'SFML',
   'Streamlit',
   'Svelte',
   'TailwindCSS',
   'TensorFlow',
   'TypeScript',
+  'VisualStudio',
 ]
