@@ -20,10 +20,16 @@ interface PageProps {
 }
 
 export const dynamicParams = false
+export const dynamic = 'force-static'
+export const revalidate = false
 
 export async function generateStaticParams() {
   const bookmarks = await getBookmarks()
-  if (!bookmarks) return []
+  // For static export without API access, return a placeholder to satisfy Next.js
+  // The page will show "not found" for this placeholder slug
+  if (!bookmarks || bookmarks.length === 0) {
+    return [{ slug: '_placeholder' }]
+  }
   return bookmarks.map((bookmark) => ({ slug: bookmark.slug }))
 }
 
@@ -76,7 +82,7 @@ export default async function CollectionPage({ params }: PageProps) {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata | null> {
-  const { slug } = await params
+  const { slug } = params
   const bookmarks = await getBookmarks()
   if (!bookmarks) return null
 
