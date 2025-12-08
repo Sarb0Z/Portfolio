@@ -50,6 +50,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Generate Contentlayer types
+        run: npx contentlayer2 build
+
       - name: Run TypeScript
         run: yarn typecheck
 
