@@ -16,8 +16,10 @@ import {
 import { sortByProperty } from '@/lib/utils'
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }
+
+export const dynamicParams = false
 
 export async function generateStaticParams() {
   const bookmarks = await getBookmarks()
@@ -47,7 +49,7 @@ async function fetchData(slug: string): Promise<{
 }
 
 export default async function CollectionPage({ params }: PageProps) {
-  const { slug } = await params
+  const { slug } = params
   const { currentBookmark, bookmarkItems } = await fetchData(slug)
 
   return (

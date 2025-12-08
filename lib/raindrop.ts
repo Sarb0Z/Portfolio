@@ -32,12 +32,21 @@ export interface BookmarksResponse {
   items: Bookmark[]
 }
 
+const hasAccessToken = Boolean(process.env.RAINDROP_ACCESS_TOKEN)
+const isStaticExport = process.env.NEXT_EXPORT === 'true'
+const shouldUseRemote = hasAccessToken && !isStaticExport
+
+const baseHeaders: Record<string, string> = {
+  'Content-Type': 'application/json',
+}
+
+if (hasAccessToken) {
+  baseHeaders.Authorization = `Bearer ${process.env.RAINDROP_ACCESS_TOKEN}`
+}
+
 const options: RequestInit = {
   method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${process.env.RAINDROP_ACCESS_TOKEN}`,
-  },
+  headers: baseHeaders,
   next: {
     revalidate: 60 * 60 * 24 * 2, // 2 days
   },
@@ -52,6 +61,10 @@ export const getBookmarkItems = async (
   if (!id) throw new Error('Bookmark ID is required')
   if (typeof pageIndex !== 'number' || pageIndex < 0) {
     throw new Error('Invalid page index')
+  }
+
+  if (!shouldUseRemote) {
+    return { items: [], count: 0 }
   }
 
   try {
@@ -76,10 +89,14 @@ export const getBookmarkItems = async (
 }
 
 export const getBookmarks = async (): Promise<Bookmark[] | null> => {
+  if (!shouldUseRemote) {
+    return []
+  }
+
   console.log('=== DEBUG getBookmarks ===')
   console.log('COLLECTION_IDS:', COLLECTION_IDS)
   console.log('RAINDROP_API_URL:', RAINDROP_API_URL)
-  console.log('Access Token exists:', !!process.env.RAINDROP_ACCESS_TOKEN)
+  console.log('Access Token exists:', hasAccessToken)
 
   try {
     const response = await fetch(`${RAINDROP_API_URL}/collections`, options)
@@ -112,6 +129,10 @@ export const getBookmarks = async (): Promise<Bookmark[] | null> => {
 }
 
 export const getBookmark = async (id: number): Promise<Bookmark | null> => {
+  if (!shouldUseRemote) {
+    return null
+  }
+
   try {
     const response = await fetch(`${RAINDROP_API_URL}/collection/${id}`, options)
     return await response.json()
