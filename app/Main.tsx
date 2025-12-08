@@ -26,7 +26,7 @@ export default function Home({ posts }) {
         </div>
         <div className="rounded-full md:hidden shadow-lg ">
           <Image
-            src="/static/images/avatar.jpg"
+            src="/static/images/avatar.png"
             alt="avatar"
             width={150}
             height={150}
@@ -34,7 +34,7 @@ export default function Home({ posts }) {
           />
         </div>
         <Image
-          src="/static/images/avatar.jpg"
+          src="/static/images/avatar.png"
           alt="avatar"
           width={200}
           height={200}

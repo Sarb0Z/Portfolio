@@ -61,6 +61,13 @@ const projectsData: ProjectDataProps[] = [
     href: 'https://huggingface.co/spaces/PrabhuKiranKonda/fastapi_mongoDB',
     techStack: ['Python', 'FastAPI', 'MongoDB', 'Docker'],
   },
+  {
+    title: 'Gamified ASD Intervention',
+    description: 'A gamified approach utilizing HCI technologies to aid emotional development in children with ASD. Features a computer vision pipeline with OpenCV and ResNet for real-time emotion recognition, integrated into a Unity-based game to provide interactive feedback and lessons.',
+    imgSrc: '/static/images/asd-project.png',
+    href: '#',
+    techStack: ['Python', 'PyTorch', 'C++'],
+  },
 ]
 
 export default projectsData

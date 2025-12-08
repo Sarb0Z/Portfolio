@@ -3,7 +3,7 @@
 import { ArrowDownIcon } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { getBookmarkItemsByPageIndex } from '@/app/actions'
+// import { getBookmarkItemsByPageIndex } from '@/app/actions'
 import { BookmarkCard } from '@/components/bookmark-card'
 import { Button } from '@/components/ui/button'
 import type { BookmarkItem } from '@/lib/raindrop'
@@ -25,17 +25,18 @@ export const BookmarkList = ({ initialData, id }: BookmarkListProps) => {
   const [pageIndex, setPageIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
-  const isReachingEnd = data.length >= (initialData?.count ?? 0)
+  // const isReachingEnd = data.length >= (initialData?.count ?? 0)
+  const isReachingEnd = true // Force true for static export
 
   const loadMore = () => {
     if (!isReachingEnd && !isLoading) setPageIndex((prevPageIndex) => prevPageIndex + 1)
   }
 
   const fetchInfiniteData = useCallback(async () => {
-    setIsLoading(true)
-    const newData = await getBookmarkItemsByPageIndex(id, pageIndex)
-    if (newData.result) setData((prevData) => [...prevData, ...newData.items])
-    setIsLoading(false)
+    // setIsLoading(true)
+    // const newData = await getBookmarkItemsByPageIndex(id, pageIndex)
+    // if (newData.result) setData((prevData) => [...prevData, ...newData.items])
+    // setIsLoading(false)
   }, [id, pageIndex])
 
   useEffect(() => {

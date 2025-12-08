@@ -133,7 +133,7 @@ export const Authors = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors],
-  exclude: ['**/*.ts', '**/*.js', '**/*.json'],
+  // exclude: ['**/*.ts', '**/*.js', '**/*.json'],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
