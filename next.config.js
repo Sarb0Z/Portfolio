@@ -87,9 +87,28 @@ module.exports = () => {
         remotePatterns: [
           {
             protocol: 'https',
+            hostname: 'images.ctfassets.net',
+          },
+          {
+            protocol: 'https',
+            hostname: '*.ctfassets.net',
+          },
+          {
+            protocol: 'https',
+            hostname: 'rdl.ink',
+          },
+          {
+            protocol: 'https',
+            hostname: '*.raindrop.io',
+          },
+          {
+            protocol: 'https',
             hostname: '**',
           },
         ],
+        dangerouslyAllowSVG: true,
+        contentDispositionType: 'attachment',
+        contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
       },
     }),
     async headers() {

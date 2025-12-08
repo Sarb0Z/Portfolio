@@ -46,7 +46,9 @@ We aim to be able to aid the performance of children who suffer from ASD on thei
 
 While the user facing-facing application is divided into three modules: ”Emotion Expression,” ”Emotion Recognition,” and ”Emotion Rejection”; a root module connects them which is responsible for serving lessons to the game. This is a singleton class that is active as an instance throughout the run-time of the application and acts as a sort of scheduler for lessons.
 
-Depending on the level selected, a series of scenarios are served so that the unity application can display them to the user. The decision of which lesson to serve is decided algorithmically based on the child’s progress. The unit is updated between each scenario as failed scenarios may enter the list again. The modules are connected through a central controller that manages the flow of data between the modules. The controller is responsible for processing the data collected by the modules and providing feedback to the child. We also use a cloud-based database to store user data and introduce new or updated lessons to the scheduler.
+Depending on the level selected, a series of scenarios are served so that the unity application can display them to the user. The decision of which lesson to serve is decided algorithmically based on the child's progress. The unit is updated between each scenario as failed scenarios may enter the list again. The modules are connected through a central controller that manages the flow of data between the modules. The controller is responsible for processing the data collected by the modules and providing feedback to the child. We also use a cloud-based database to store user data and introduce new or updated lessons to the scheduler.
+
+<CImage src="/static/images/level_select.png" caption="Level Selection Screen - Children can choose different emotion learning modules" />
 
 ### Show Emotion Module
 
@@ -56,6 +58,8 @@ Our strategic approach involves providing users with immediate feedback through 
 *   **Green:** Success (above 80%)
 *   **Orange:** Room for improvement (50% - 80%)
 *   **Red:** Incorrect (below 50%)
+
+<CImage src="/static/images/show_emotion.png" caption="Show Emotion Module - Real-time emotion recognition with visual feedback" />
 
 This visual cueing system not only reinforces positive outcomes but also encourages users to revisit previous modules for further enhancement, fostering a continuous learning loop. Throughout development, we prioritize rigorous testing and user feedback to refine the system’s accuracy and user interface.
 

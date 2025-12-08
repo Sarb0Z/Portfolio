@@ -6,11 +6,11 @@ const siteMetadata = {
   description: 'Exploring Tech and more',
   language: 'en-us',
   theme: 'dark', // system, dark or light
-  siteUrl: 'https://prabhukirankonda.vercel.app',
+  siteUrl: 'https://www.abdulrafayzahid.dev',
   siteRepo: 'https://github.com/Sarb0z/Portfolio',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
-  email: 'prabhukiran426@gmail.com',
+  email: 'abdulrafay972@gmail.com',
   github: 'https://github.com/Sarb0z',
   linkedin: 'https://www.linkedin.com/in/abdul-rafay-zahid',
   locale: 'en-US',

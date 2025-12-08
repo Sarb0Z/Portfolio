@@ -1,5 +1,3 @@
-import 'server-only'
-
 import { COLLECTION_IDS } from '@/lib/constants'
 
 export interface Bookmark {
@@ -33,8 +31,6 @@ export interface BookmarksResponse {
 }
 
 const hasAccessToken = Boolean(process.env.RAINDROP_ACCESS_TOKEN)
-const isStaticExport = process.env.NEXT_EXPORT === 'true'
-const shouldUseRemote = hasAccessToken && !isStaticExport
 
 const baseHeaders: Record<string, string> = {
   'Content-Type': 'application/json',
@@ -63,7 +59,7 @@ export const getBookmarkItems = async (
     throw new Error('Invalid page index')
   }
 
-  if (!shouldUseRemote) {
+  if (!hasAccessToken) {
     return { items: [], count: 0 }
   }
 
@@ -89,7 +85,7 @@ export const getBookmarkItems = async (
 }
 
 export const getBookmarks = async (): Promise<Bookmark[] | null> => {
-  if (!shouldUseRemote) {
+  if (!hasAccessToken) {
     return []
   }
 
@@ -129,7 +125,7 @@ export const getBookmarks = async (): Promise<Bookmark[] | null> => {
 }
 
 export const getBookmark = async (id: number): Promise<Bookmark | null> => {
-  if (!shouldUseRemote) {
+  if (!hasAccessToken) {
     return null
   }
 

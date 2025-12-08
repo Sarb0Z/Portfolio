@@ -64,7 +64,7 @@ const projectsData: ProjectDataProps[] = [
   {
     title: 'Gamified ASD Intervention',
     description: 'A gamified approach utilizing HCI technologies to aid emotional development in children with ASD. Features a computer vision pipeline with OpenCV and ResNet for real-time emotion recognition, integrated into a Unity-based game to provide interactive feedback and lessons.',
-    imgSrc: '/static/images/asd-project.png',
+    imgSrc: '/static/images/level_select.png',
     href: '#',
     techStack: ['Python', 'PyTorch', 'C++'],
   },
