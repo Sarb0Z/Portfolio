@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import { Link2Icon } from 'lucide-react'
 
 import type { BookmarkItem } from '@/lib/raindrop'
@@ -8,6 +10,8 @@ interface BookmarkCardProps {
 }
 
 export const BookmarkCard = ({ bookmark, order }: BookmarkCardProps) => {
+  const isPriority = order < 2
+
   return (
     <a
       key={bookmark._id}
@@ -18,17 +22,17 @@ export const BookmarkCard = ({ bookmark, order }: BookmarkCardProps) => {
       data-bookmark-order={order}
     >
       <span className="aspect-[1200/630] overflow-hidden rounded-lg">
-        <img
+        <Image
           src={bookmark.cover || '/assets/fallback.avif'}
           alt={bookmark.title}
           width={1200}
           height={630}
-          loading={order < 2 ? 'eager' : 'lazy'}
+          priority={isPriority}
+          loading={isPriority ? 'eager' : 'lazy'}
           className="animate-reveal aspect-[1200/630] rounded-lg border bg-cover bg-center bg-no-repeat object-cover"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement
-            target.onerror = null
-            target.src = '/assets/fallback.avif'
+          onError={(event) => {
+            event.currentTarget.onerror = null
+            event.currentTarget.src = '/assets/fallback.avif'
           }}
         />
       </span>

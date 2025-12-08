@@ -37,7 +37,7 @@ export const BookmarkList = ({ initialData, id }: BookmarkListProps) => {
     // const newData = await getBookmarkItemsByPageIndex(id, pageIndex)
     // if (newData.result) setData((prevData) => [...prevData, ...newData.items])
     // setIsLoading(false)
-  }, [id, pageIndex])
+  }, [])
 
   useEffect(() => {
     if (pageIndex > 0) fetchInfiniteData()

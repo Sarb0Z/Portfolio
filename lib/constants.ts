@@ -1,13 +1,8 @@
-
 // readcv: {
 //   url: 'https://read.cv/onur'
 // },
 
-export const COLLECTION_IDS: number[] = [
-  63965223,
-  64055696
-]
-
+export const COLLECTION_IDS: number[] = [63965223, 64055696]
 
 export const SCROLL_AREA_ID: string = 'scroll-area'
 export const MOBILE_SCROLL_THRESHOLD: number = 20
@@ -20,5 +15,5 @@ export const SUBMIT_BOOKMARK_FORM_DESCRIPTION: string =
 export const CONTENT_TYPES: Record<string, string> = {
   PAGE: 'page',
   POST: 'post',
-  LOGBOOK: 'logbook'
+  LOGBOOK: 'logbook',
 }
