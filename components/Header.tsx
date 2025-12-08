@@ -60,7 +60,9 @@ const Header = () => {
                   <li key={link.title}>
                     <Link
                       href={link.href}
-                      className="relative inline-block px-3 py-1 text-lg tracking-wider rounded-lg group hover:bg-gray-200 dark:hover:bg-gray-800"
+                      className={`relative inline-block px-3 py-1 text-lg tracking-wider rounded-lg group hover:bg-gray-200 dark:hover:bg-gray-800 ${
+                        isExperiencePage ? 'text-white' : ''
+                      }`}
                     >
                       <span
                         className={`absolute rounded-full -bottom-1 left-1/2 transform -translate-x-1/2 w-4 h-[3px] bg-black dark:bg-white opacity-0 group-hover:opacity-100 transition-opacity ${

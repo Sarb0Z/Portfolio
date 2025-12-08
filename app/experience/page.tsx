@@ -8,7 +8,7 @@ export const metadata = genPageMetadata({
 
 export default function ExperiencePage() {
   return (
-    <div className="relative h-screen overflow-y-auto bg-cosmic-900 snap-y snap-mandatory scroll-smooth">
+    <div className="relative h-screen overflow-y-scroll bg-cosmic-900 snap-y snap-mandatory scroll-smooth no-scrollbar">
       {/* Cosmic header - always dark theme for consistency */}
       <div className="relative z-20 pt-6 pb-8 md:pb-12 px-4 bg-gradient-to-b from-cosmic-900 via-cosmic-900/95 to-transparent snap-start">
         <div className="max-w-6xl mx-auto">
