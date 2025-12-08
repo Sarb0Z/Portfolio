@@ -42,10 +42,18 @@ const MobileNav = ({ isExperiencePage = false }: MobileNavProps) => {
 
       {/* Overlay */}
       <div
+        role="button"
+        tabIndex={0}
+        aria-label="Close menu"
         className={`fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
           navShow ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onToggleNav}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            onToggleNav()
+          }
+        }}
       />
 
       {/* Sidebar */}
