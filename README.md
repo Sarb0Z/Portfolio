@@ -2,7 +2,7 @@
 
 A Next.js 14 portfolio and blog site with MDX content, Tailwind CSS styling, and multiple deployment options.
 
-> **Note:** This is the Next.js version. A SvelteKit version is also available at [prabhukirankonda.vercel.app](https://prabhukirankonda.vercel.app/) — [Repo](https://github.com/PrabhuKiran8790/prabhukirankonda.vercel.app/tree/main)
+> **Note:** This is the Next.js version. A SvelteKit version is also available at [abdulrafayzahid.dev](abdulrafayzahid.dev/) — [Repo](https://github.com/Sarb0z/Portfolio)
 
 ## Features
 
