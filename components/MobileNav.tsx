@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
 import { usePathname } from 'next/navigation'
@@ -12,7 +13,12 @@ interface MobileNavProps {
 
 const MobileNav = ({ isExperiencePage = false }: MobileNavProps) => {
   const [navShow, setNavShow] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const onToggleNav = () => {
     setNavShow((status) => {
@@ -26,41 +32,28 @@ const MobileNav = ({ isExperiencePage = false }: MobileNavProps) => {
     })
   }
 
-  return (
-    <>
-      <button
-        aria-label="Toggle Menu"
-        onClick={onToggleNav}
-        className={`p-2 rounded-lg transition-colors ${
-          isExperiencePage
-            ? 'hover:bg-white/10 text-white'
-            : 'hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-900 dark:text-gray-100'
-        }`}
-      >
-        <Menu size={24} />
-      </button>
 
+  useEffect(() => {
+    if (!navShow) {
+      document.body.style.overflow = 'auto'
+    }
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [navShow])
+
+  const mobileMenu = (
+    <>
       {/* Overlay */}
       <div
-        role="button"
-        tabIndex={0}
-        aria-label="Close menu"
-        className={`fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
-          navShow ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        aria-hidden="true"
+        className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-100"
         onClick={onToggleNav}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            onToggleNav()
-          }
-        }}
       />
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-72 transform bg-white dark:bg-zinc-950 shadow-2xl transition-transform duration-300 ease-in-out ${
-          navShow ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className="fixed top-0 right-0 z-[70] h-full w-72 flex flex-col bg-white dark:bg-zinc-950 shadow-2xl transition-transform duration-300 ease-in-out translate-x-0"
       >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
@@ -75,7 +68,7 @@ const MobileNav = ({ isExperiencePage = false }: MobileNavProps) => {
         </div>
 
         {/* Navigation Links */}
-        <nav className="p-4">
+        <nav className="flex-1 overflow-y-auto p-4 pb-32">
           <ul className="space-y-1">
             {headerNavLinks.map((route) => (
               <li key={route.href}>
@@ -96,13 +89,31 @@ const MobileNav = ({ isExperiencePage = false }: MobileNavProps) => {
         </nav>
 
         {/* Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-800">
+        <div className="shrink-0 p-4 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-950">
           <div className="text-center">
             <p className="font-semibold text-gray-900 dark:text-gray-100">Abdul Rafay Zahid</p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Full Stack Developer</p>
           </div>
         </div>
       </div>
+    </>
+  )
+
+  return (
+    <>
+      <button
+        aria-label="Toggle Menu"
+        onClick={onToggleNav}
+        className={`p-2 rounded-lg transition-colors ${
+          isExperiencePage
+            ? 'hover:bg-white/10 text-white'
+            : 'hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-900 dark:text-gray-100'
+        }`}
+      >
+        <Menu size={24} />
+      </button>
+
+      {mounted && navShow && createPortal(mobileMenu, document.body)}
     </>
   )
 }
