@@ -32,7 +32,6 @@ const MobileNav = ({ isExperiencePage = false }: MobileNavProps) => {
     })
   }
 
-
   useEffect(() => {
     if (!navShow) {
       document.body.style.overflow = 'auto'
@@ -52,9 +51,7 @@ const MobileNav = ({ isExperiencePage = false }: MobileNavProps) => {
       />
 
       {/* Sidebar */}
-      <div
-        className="fixed top-0 right-0 z-[70] h-full w-72 flex flex-col bg-white dark:bg-zinc-950 shadow-2xl transition-transform duration-300 ease-in-out translate-x-0"
-      >
+      <div className="fixed top-0 right-0 z-[70] h-full w-72 flex flex-col bg-white dark:bg-zinc-950 shadow-2xl transition-transform duration-300 ease-in-out translate-x-0">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
           <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">Menu</span>
