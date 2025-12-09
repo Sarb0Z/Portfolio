@@ -58,7 +58,7 @@ const MobileNav = ({ isExperiencePage = false }: MobileNavProps) => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-72 transform bg-white dark:bg-zinc-900 shadow-2xl transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 z-50 h-full w-72 transform bg-white dark:bg-zinc-950 shadow-2xl transition-transform duration-300 ease-in-out ${
           navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

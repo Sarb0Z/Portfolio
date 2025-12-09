@@ -193,7 +193,7 @@ const experienceData: ExperienceData[] = [
     endDate: 'August 2022',
     type: 'internship',
     achievements: [
-      "Collaborated with a team to develop the .NET backend for a government portal, incorporating encryption with Bcrypt, authentication with JWT, and automating API tests using Postman",
+      'Collaborated with a team to develop the .NET backend for a government portal, incorporating encryption with Bcrypt, authentication with JWT, and automating API tests using Postman',
       "Researched and optimized an architecture solution to streamline the CI/CD pipeline to the client's inhouse data center infrastructure",
     ],
     techStack: ['DotNet', 'PostgreSQL', 'Bcrypt', 'JWT', 'Postman'],

@@ -89,33 +89,16 @@ export const getBookmarks = async (): Promise<Bookmark[] | null> => {
     return []
   }
 
-  console.log('=== DEBUG getBookmarks ===')
-  console.log('COLLECTION_IDS:', COLLECTION_IDS)
-  console.log('RAINDROP_API_URL:', RAINDROP_API_URL)
-  console.log('Access Token exists:', hasAccessToken)
-
   try {
     const response = await fetch(`${RAINDROP_API_URL}/collections`, options)
-    console.log('API Response status:', response.status)
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
     const bookmarks: BookmarksResponse = await response.json()
-    console.log('API returned items count:', bookmarks.items?.length)
-    console.log(
-      'API returned item IDs:',
-      bookmarks.items?.map((b) => ({ _id: b._id, title: b.title }))
-    )
 
     const filtered = bookmarks.items.filter((bookmark) => COLLECTION_IDS.includes(bookmark._id))
-    console.log('Filtered bookmarks count:', filtered.length)
-    console.log(
-      'Filtered bookmarks:',
-      filtered.map((b) => ({ _id: b._id, title: b.title }))
-    )
-    console.log('=== END DEBUG ===')
 
     return filtered
   } catch (error) {

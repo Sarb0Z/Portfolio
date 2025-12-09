@@ -1,6 +1,6 @@
 ---
-title: "Why perf, tshark, and valgrind Miss the Point: Measuring Latency in Multi-Threaded Applications"
-summary: "Traditional profiling tools measure CPU time spent, not response time. In multi-threaded applications, this distinction is critical—and often misunderstood."
+title: 'Why perf, tshark, and valgrind Miss the Point: Measuring Latency in Multi-Threaded Applications'
+summary: 'Traditional profiling tools measure CPU time spent, not response time. In multi-threaded applications, this distinction is critical—and often misunderstood.'
 date: '2024-12-09'
 draft: false
 tags: ['Performance', 'Systems Programming', 'Profiling']
@@ -12,11 +12,11 @@ layout: PostSimple
 
 ## The Profiling Paradox
 
-You've just optimized your multi-threaded application. You fire up `perf`, run your workload, and see that total CPU time has *increased*. Your instinct says you've made things worse. But have you?
+You've just optimized your multi-threaded application. You fire up `perf`, run your workload, and see that total CPU time has _increased_. Your instinct says you've made things worse. But have you?
 
 Here's the counterintuitive truth: **spending more total CPU time across multiple threads can actually improve your application's responsiveness**.
 
-Traditional profiling tools like `perf`, `valgrind`, and `tshark` excel at measuring *work done*—CPU cycles consumed, memory allocated, packets processed. But in a multi-threaded context, they often miss what matters most: **latency to response**.
+Traditional profiling tools like `perf`, `valgrind`, and `tshark` excel at measuring _work done_—CPU cycles consumed, memory allocated, packets processed. But in a multi-threaded context, they often miss what matters most: **latency to response**.
 
 ## Understanding the Distinction
 
@@ -64,7 +64,7 @@ perf stat ./my_application
 
 ```
 Performance counter stats for './my_application':
-    
+
     480.23 msec task-clock        # 3.842 CPUs utilized
     120.45 msec elapsed time      # This is what actually matters!
 ```
@@ -98,12 +98,14 @@ This shows time between packets, but not the end-to-end latency as perceived by 
 I recently profiled an image processing service. Here's what traditional profiling showed:
 
 **Before optimization (single-threaded):**
+
 ```
 Total CPU time: 850ms per image
 perf hotspots: decode (300ms), resize (200ms), encode (350ms)
 ```
 
 **After optimization (multi-threaded with pipeline):**
+
 ```
 Total CPU time: 1,100ms per image
 perf hotspots: decode (320ms), resize (220ms), encode (370ms), synchronization (190ms)
@@ -150,7 +152,7 @@ void start_measurement(latency_measurement *m) {
 
 void end_measurement(latency_measurement *m) {
     clock_gettime(CLOCK_MONOTONIC, &m->end);
-    m->wall_time_ns = (m->end.tv_sec - m->start.tv_sec) * 1000000000ULL 
+    m->wall_time_ns = (m->end.tv_sec - m->start.tv_sec) * 1000000000ULL
                     + (m->end.tv_nsec - m->start.tv_nsec);
 }
 ```
@@ -184,37 +186,37 @@ class LatencyProfile:
     wall_clock_ms: float
     cpu_time_ms: float
     parallelism_efficiency: float  # wall_clock / (cpu_time / num_cores)
-    
+
 def profile_with_latency(command: List[str], iterations: int = 10) -> LatencyProfile:
     wall_times = []
     cpu_times = []
-    
+
     for _ in range(iterations):
         start_wall = time.perf_counter()
-        
+
         result = subprocess.run(
             ["perf", "stat", "-x", ",", "-e", "task-clock"] + command,
             capture_output=True,
             text=True
         )
-        
+
         end_wall = time.perf_counter()
         wall_times.append((end_wall - start_wall) * 1000)
-        
+
         # Parse perf output for CPU time
         for line in result.stderr.split('\n'):
             if 'task-clock' in line:
                 cpu_times.append(float(line.split(',')[0]))
                 break
-    
+
     avg_wall = statistics.mean(wall_times)
     avg_cpu = statistics.mean(cpu_times)
-    
+
     import os
     num_cores = os.cpu_count() or 1
     theoretical_parallel_time = avg_cpu / num_cores
     efficiency = theoretical_parallel_time / avg_wall if avg_wall > 0 else 0
-    
+
     return LatencyProfile(
         wall_clock_ms=avg_wall,
         cpu_time_ms=avg_cpu,
@@ -257,16 +259,16 @@ SEC("uprobe/request_end")
 int trace_request_end(struct pt_regs *ctx) {
     u64 tid = bpf_get_current_pid_tgid();
     u64 *start_ts = bpf_map_lookup_elem(&start_times, &tid);
-    
+
     if (start_ts) {
         u64 latency_ns = bpf_ktime_get_ns() - *start_ts;
         u32 bucket = latency_ns / 1000000;  // Convert to ms buckets
-        
+
         u64 *count = bpf_map_lookup_elem(&latency_hist, &bucket);
         if (count) {
             __sync_fetch_and_add(count, 1);
         }
-        
+
         bpf_map_delete_elem(&start_times, &tid);
     }
     return 0;
@@ -328,10 +330,10 @@ The tools we've relied on for decades—`perf`, `valgrind`, `tshark`—are incre
 
 In modern multi-threaded applications, **spending more CPU cycles to reduce latency is often the right trade-off**. Our profiling tools need to evolve to reflect this reality.
 
-The next time you profile your application, ask yourself: *"Am I measuring what my users experience, or what my CPUs are doing?"*
+The next time you profile your application, ask yourself: _"Am I measuring what my users experience, or what my CPUs are doing?"_
 
 The answer might change how you optimize.
 
 ---
 
-*Want to dive deeper? Check out Brendan Gregg's work on [eBPF performance tools](https://www.brendangregg.com/ebpf.html) and the [BPF Performance Tools](http://www.brendangregg.com/bpf-performance-tools-book.html) book for advanced latency profiling techniques.*
+_Want to dive deeper? Check out Brendan Gregg's work on [eBPF performance tools](https://www.brendangregg.com/ebpf.html) and the [BPF Performance Tools](http://www.brendangregg.com/bpf-performance-tools-book.html) book for advanced latency profiling techniques._

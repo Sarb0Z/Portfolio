@@ -25,22 +25,25 @@ We aim to be able to aid the performance of children who suffer from ASD on thei
 ### Data Cleaning and Fine-Tuning
 
 **Data Cleaning:**
-*   **Objective:** Ensure the dataset’s quality and consistency for effective model training.
-*   **Processes:**
-    *   **Quality Control:** Remove images with poor lighting, blur, or other quality issues.
-    *   **Label Consistency:** Address any discrepancies or biases in emotion labels.
-    *   **Standardization:** Standardize image sizes and formats for consistency.
+
+- **Objective:** Ensure the dataset’s quality and consistency for effective model training.
+- **Processes:**
+  - **Quality Control:** Remove images with poor lighting, blur, or other quality issues.
+  - **Label Consistency:** Address any discrepancies or biases in emotion labels.
+  - **Standardization:** Standardize image sizes and formats for consistency.
 
 **Fine-Tuning:**
-*   **Objective:** Adapt a pre-trained model to the specific emotion recognition task.
-*   **Processes:**
-    *   **Transfer Learning:** Utilize the knowledge learned by the pre-trained model on a different task.
-    *   **Task-Specific Training:** Fine-tune the model on the emotion recognition task using the cleaned and augmented dataset.
+
+- **Objective:** Adapt a pre-trained model to the specific emotion recognition task.
+- **Processes:**
+  - **Transfer Learning:** Utilize the knowledge learned by the pre-trained model on a different task.
+  - **Task-Specific Training:** Fine-tune the model on the emotion recognition task using the cleaned and augmented dataset.
 
 **Model Deployment:**
-*   **Input:** Trained and evaluated model.
-*   **Process:** Deploy the model to a production environment or integrate it into the target system (Unity game). Implement real-time or batch processing capabilities.
-*   **Output:** Deployed model ready for inference.
+
+- **Input:** Trained and evaluated model.
+- **Process:** Deploy the model to a production environment or integrate it into the target system (Unity game). Implement real-time or batch processing capabilities.
+- **Output:** Deployed model ready for inference.
 
 ### Lesson Providing Module
 
@@ -48,18 +51,25 @@ While the user facing-facing application is divided into three modules: ”Emoti
 
 Depending on the level selected, a series of scenarios are served so that the unity application can display them to the user. The decision of which lesson to serve is decided algorithmically based on the child's progress. The unit is updated between each scenario as failed scenarios may enter the list again. The modules are connected through a central controller that manages the flow of data between the modules. The controller is responsible for processing the data collected by the modules and providing feedback to the child. We also use a cloud-based database to store user data and introduce new or updated lessons to the scheduler.
 
-<CImage src="/static/images/level_select.png" caption="Level Selection Screen - Children can choose different emotion learning modules" />
+<CImage
+  src="/static/images/level_select.png"
+  caption="Level Selection Screen - Children can choose different emotion learning modules"
+/>
 
 ### Show Emotion Module
 
 In the implementation of the Show Emotion Module, we embark on a sophisticated real-time emotion expression assessment utilizing camera permissions in Unity. The user is presented with an emotion prompt, and with the assistance of a machine learning module, their real-time expression is evaluated as they mimic the displayed emotion. For the machine learning aspect, we propose the incorporation of well-established models such as OpenPose for precise pose detection and EmoReact for emotion recognition. These models can be pre-trained on comprehensive datasets like AffectNet or CK+, ensuring robust performance.
 
 Our strategic approach involves providing users with immediate feedback through a percentage display, indicating the correctness of their expression. A color-coded theme enhances the user experience:
-*   **Green:** Success (above 80%)
-*   **Orange:** Room for improvement (50% - 80%)
-*   **Red:** Incorrect (below 50%)
 
-<CImage src="/static/images/show_emotion.png" caption="Show Emotion Module - Real-time emotion recognition with visual feedback" />
+- **Green:** Success (above 80%)
+- **Orange:** Room for improvement (50% - 80%)
+- **Red:** Incorrect (below 50%)
+
+<CImage
+  src="/static/images/show_emotion.png"
+  caption="Show Emotion Module - Real-time emotion recognition with visual feedback"
+/>
 
 This visual cueing system not only reinforces positive outcomes but also encourages users to revisit previous modules for further enhancement, fostering a continuous learning loop. Throughout development, we prioritize rigorous testing and user feedback to refine the system’s accuracy and user interface.
 
@@ -74,17 +84,22 @@ The image dataset used contained **28,821 Training images** and **7,066 Testing 
 ### Models Considered
 
 #### 1. VGGFace
+
 VGGFace is a model that is utilized for face recognition and is adaptable for emotion recognition tasks. It is well known for its high accuracy in recognizing facial features. Although the model is not specifically trained on children’s datasets, it can be employed for tasks involving multiple emotions, and finetuning for children is trivial. The model’s architecture, characterized by a large size, makes it suitable for capturing intricate facial expressions. If Unity Integration is required, some custom implementation based on Unity’s ML-Agents or other compatible frameworks must be used.
 
 #### 2. Facenet
+
 Facenet was uniquely designed for face recognition and offers adaptability for emotion recognition through fine-tuning its last layers. Facenet achieves high accuracy with a moderately large model size. It also lacks specific training on children datasets, and custom implementation is needed for Unity integration. The number of emotions it can recognize is adaptable based on fine-tuning, making it versatile for different tasks.
-*   **Accuracy:** 0.55
-*   **ROC:** 0.9
+
+- **Accuracy:** 0.55
+- **ROC:** 0.9
 
 #### 3. ResNet
+
 ResNet (specifically ResNet-50 or ResNet-101), is also a popular choice for emotion recognition. It can be fine-tuned to adapt to specific emotion recognition tasks just like facenet. It has a large model size and high accuracy. Furthermore, ResNet requires custom implementation for Unity integration. While not specifically trained on children’s datasets, it is nonetheless easily adapted and therefore suitable for our purpose.
-*   **Accuracy:** 0.64
-*   **ROC:** 0.95
+
+- **Accuracy:** 0.64
+- **ROC:** 0.95
 
 ### Model Comparison & Selection
 

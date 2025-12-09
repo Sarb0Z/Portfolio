@@ -18,14 +18,16 @@ const projectsData: ProjectDataProps[] = [
   },
   {
     title: 'Gamified ASD Intervention',
-    description: 'A gamified approach utilizing HCI technologies to aid emotional development in children with ASD. Features a computer vision pipeline with OpenCV and ResNet for real-time emotion recognition, integrated into a Unity-based game to provide interactive feedback and lessons.',
+    description:
+      'A gamified approach utilizing HCI technologies to aid emotional development in children with ASD. Features a computer vision pipeline with OpenCV and ResNet for real-time emotion recognition, integrated into a Unity-based game to provide interactive feedback and lessons.',
     imgSrc: '/static/images/level_select.png',
     href: '#',
     techStack: ['Python', 'PyTorch', 'C++'],
   },
   {
     title: 'Candy Crush Clone',
-    description: 'A fully-featured Candy Crush clone built from scratch using C++ and SFML. This project was an early deep dive into low-level graphics programming, requiring me to learn about shaders, sprite rendering, and the intricacies of dynamic vs static linking for compilers. Features include match-3 gameplay mechanics, special candy combinations (striped, wrapped, color bombs), save/load game state, and a scoring system.',
+    description:
+      'A fully-featured Candy Crush clone built from scratch using C++ and SFML. This project was an early deep dive into low-level graphics programming, requiring me to learn about shaders, sprite rendering, and the intricacies of dynamic vs static linking for compilers. Features include match-3 gameplay mechanics, special candy combinations (striped, wrapped, color bombs), save/load game state, and a scoring system.',
     imgSrc: '/static/images/candy-crush.png',
     href: 'https://github.com/Sarb0Z/CandyCrush',
     techStack: ['C++', 'SFML', 'VisualStudio'],
