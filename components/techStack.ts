@@ -4,13 +4,11 @@ export type TechStack =
   | 'C++'
   | 'Cython'
   | 'Docker'
-  | 'Drizzle'
   | 'ElasticSearch'
   | 'FastAPI'
   | 'Firebase'
   | 'GCP'
   | 'Git'
-  | 'Java'
   | 'Kafka'
   | 'LangChain'
   | 'MongoDB'
@@ -28,12 +26,9 @@ export type TechStack =
   | 'React'
   | 'Redis'
   | 'SFML'
-  | 'Streamlit'
-  | 'Svelte'
   | 'TailwindCSS'
   | 'TensorFlow'
   | 'TypeScript'
-  | 'VisualStudio'
 
 export const techStack: TechStack[] = [
   'AWS',
@@ -41,13 +36,11 @@ export const techStack: TechStack[] = [
   'C++',
   'Cython',
   'Docker',
-  'Drizzle',
   'ElasticSearch',
   'FastAPI',
   'Firebase',
   'GCP',
   'Git',
-  'Java',
   'Kafka',
   'LangChain',
   'MongoDB',
@@ -65,10 +58,7 @@ export const techStack: TechStack[] = [
   'React',
   'Redis',
   'SFML',
-  'Streamlit',
-  'Svelte',
   'TailwindCSS',
   'TensorFlow',
   'TypeScript',
-  'VisualStudio',
 ]
