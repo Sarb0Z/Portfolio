@@ -1,11 +1,9 @@
 export type TechStack =
   | 'AWS'
   | 'Azure'
-  | 'Bcrypt'
   | 'C++'
   | 'Cython'
   | 'Docker'
-  | 'DotNet'
   | 'Drizzle'
   | 'ElasticSearch'
   | 'FastAPI'
@@ -13,10 +11,7 @@ export type TechStack =
   | 'GCP'
   | 'Git'
   | 'Java'
-  | 'JavaScript'
-  | 'JWT'
   | 'Kafka'
-  | 'Kubernetes'
   | 'LangChain'
   | 'MongoDB'
   | 'MySQL'
@@ -43,11 +38,9 @@ export type TechStack =
 export const techStack: TechStack[] = [
   'AWS',
   'Azure',
-  'Bcrypt',
   'C++',
   'Cython',
   'Docker',
-  'DotNet',
   'Drizzle',
   'ElasticSearch',
   'FastAPI',
@@ -55,10 +48,7 @@ export const techStack: TechStack[] = [
   'GCP',
   'Git',
   'Java',
-  'JavaScript',
-  'JWT',
   'Kafka',
-  'Kubernetes',
   'LangChain',
   'MongoDB',
   'MySQL',

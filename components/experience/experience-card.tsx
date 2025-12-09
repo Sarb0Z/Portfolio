@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { ExperienceData, experienceTypeConfig } from '@/data/experienceData'
-import { DevIcons } from '@/components/DevIcons'
+import { LazyDevIcon, getLazyIcon } from '@/components/LazyDevIcon'
 import { cn } from '@/lib/utils'
 
 interface ExperienceCardProps {
@@ -179,13 +179,13 @@ export function ExperienceCard({ experience, position, index }: ExperienceCardPr
         {/* Tech stack */}
         <div className="flex flex-wrap gap-2">
           {experience.techStack.map((tech) => {
-            const Icon = DevIcons[tech]
-            return Icon ? (
+            const hasIcon = getLazyIcon(tech) !== null
+            return hasIcon ? (
               <div
                 key={tech}
                 className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-cosmic-700/50 text-xs text-starlight-dim"
               >
-                <Icon />
+                <LazyDevIcon name={tech} />
                 <span>{tech}</span>
               </div>
             ) : (

@@ -3,8 +3,8 @@ import 'pliny/search/algolia.css'
 
 import { Space_Grotesk, Fuggles } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
-import { AnalyticsConfig } from 'pliny/analytics'
-import { SearchProvider, SearchConfig } from 'pliny/search'
+import { LazySearchProvider } from '@/components/LazySearchProvider'
+import type { SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
@@ -85,11 +85,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProviders>
           <SectionContainer>
             <div className="flex h-screen flex-col justify-between font-sans pt-14 md:pt-[4.1rem]">
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+              <LazySearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                 <Header />
                 <main className="mb-auto">{children}</main>
                 <Analytics />
-              </SearchProvider>
+              </LazySearchProvider>
               <Footer />
             </div>
           </SectionContainer>

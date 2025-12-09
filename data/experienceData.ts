@@ -180,9 +180,9 @@ const experienceData: ExperienceData[] = [
     type: 'internship',
     achievements: [
       'Designed and developed API functionalities for seamless interaction between PostgreSQL database and e-commerce platform, ensuring secure user authentication using Azure AD',
-      'Containerized and orchestrated our platform to cloud environments, utilizing Docker and Kubernetes IaC, as part of our Azure DevOps pipeline in a reliable, and cost-effective manner',
+      'Containerized and deployed our platform to cloud environments, utilizing Docker as part of our Azure DevOps pipeline in a reliable, and cost-effective manner',
     ],
-    techStack: ['PostgreSQL', 'Docker', 'Kubernetes', 'Azure'],
+    techStack: ['PostgreSQL', 'Docker', 'Azure'],
   },
   {
     id: 'pitb',
@@ -193,10 +193,10 @@ const experienceData: ExperienceData[] = [
     endDate: 'August 2022',
     type: 'internship',
     achievements: [
-      'Collaborated with a team to develop the .NET backend for a government portal, incorporating encryption with Bcrypt, authentication with JWT, and automating API tests using Postman',
+      'Collaborated with a team to develop the .NET backend for a government portal using Angular, incorporating encryption with Bcrypt, authentication with JWT, and automating API tests using Postman',
       "Researched and optimized an architecture solution to streamline the CI/CD pipeline to the client's inhouse data center infrastructure",
     ],
-    techStack: ['DotNet', 'PostgreSQL', 'Bcrypt', 'JWT', 'Postman'],
+    techStack: ['PostgreSQL', 'Postman'],
   },
 ]
 

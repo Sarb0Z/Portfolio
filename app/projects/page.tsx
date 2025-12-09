@@ -18,7 +18,7 @@ export default function Projects() {
         </div>
         <div className="py-5">
           <div className="flex flex-wrap justify-center gap-8">
-            {projectsData.map((d) => (
+            {projectsData.map((d, index) => (
               <Card
                 key={d.title}
                 title={d.title}
@@ -26,6 +26,7 @@ export default function Projects() {
                 imgSrc={d.imgSrc}
                 href={d.href}
                 techStack={d.techStack}
+                priority={index === 0}
               />
             ))}
           </div>

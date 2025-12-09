@@ -30,6 +30,10 @@ export default function Home({ posts }) {
             alt="avatar"
             width={150}
             height={150}
+            priority
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+            sizes="150px"
             className="h-50 w-50 rounded-full shadow-gray-300"
           />
         </div>
@@ -38,6 +42,10 @@ export default function Home({ posts }) {
           alt="avatar"
           width={200}
           height={200}
+          priority
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+          sizes="200px"
           className="h-50 w-50 rounded-full hidden md:block shadow-lg shadow-gray-400"
         />
       </div>

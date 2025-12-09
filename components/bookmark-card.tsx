@@ -27,6 +27,7 @@ export const BookmarkCard = ({ bookmark, order }: BookmarkCardProps) => {
           alt={bookmark.title}
           width={1200}
           height={630}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
           priority={isPriority}
           loading={isPriority ? 'eager' : 'lazy'}
           className="animate-reveal aspect-[1200/630] rounded-lg border bg-cover bg-center bg-no-repeat object-cover"
