@@ -16,13 +16,31 @@ export default function Home({ posts }) {
             <span className="wave">👋🏻</span>, <span>I'm </span>
             <span className="text-sky-500 dark:text-teal-400">Abdul Rafay Zahid</span>
           </h1>
-          <p>Welcome to my blog - here I share everything that I love.</p>
-          <Link
-            href="/about"
-            className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded mt-4 inline-block"
-          >
-            About Me
-          </Link>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl">
+            Backend and systems engineer. I scale C++ network gateways, build mail infrastructure
+            that sends 200K+ emails a day, and write the plumbing under AI products. Open to remote
+            work and sponsored relocation.
+          </p>
+          <div className="flex flex-wrap gap-3 mt-4">
+            <Link
+              href="/about"
+              className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded inline-block"
+            >
+              About Me
+            </Link>
+            <a
+              href="/resume.pdf"
+              className="border-2 border-gray-800 dark:border-gray-200 text-gray-900 dark:text-gray-100 font-bold py-2 px-4 rounded inline-block hover:bg-gray-900 hover:text-white dark:hover:bg-gray-100 dark:hover:text-gray-900"
+            >
+              Resume (PDF)
+            </a>
+            <Link
+              href="/projects"
+              className="border-2 border-gray-800 dark:border-gray-200 text-gray-900 dark:text-gray-100 font-bold py-2 px-4 rounded inline-block hover:bg-gray-900 hover:text-white dark:hover:bg-gray-100 dark:hover:text-gray-900"
+            >
+              Projects
+            </Link>
+          </div>
         </div>
         <div className="rounded-full md:hidden shadow-lg ">
           <Image

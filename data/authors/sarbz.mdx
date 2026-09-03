@@ -1,9 +1,9 @@
 ---
 name: Abdul Rafay Zahid
-avatar: /static/images/avatar.jpg
-occupation: A Tech Enthusiast
-company:
-email: abdulrafay972@gmail.com
+avatar: /static/images/avatar.png
+occupation: Backend and Systems Engineer
+company: Softaims
+email: sarbzga@gmail.com
 linkedin: https://www.linkedin.com/in/abdul-rafay-zahid
 github: https://github.com/Sarb0z
 ---
@@ -12,22 +12,29 @@ import { FamiliarTechStack } from '@/components/DevIcons'
 
 ## About Me 👨‍💻
 
-Hello <span className="wave">👋</span>  
-I'm `Abdul Rafay Zahid`, a technology enthusiast with a deep love for programming. I have a passion for working on impactful and meaningful technology, and I love sharing my insights and exploration of cutting-edge technology with others.
+I scale C++ network gateways, build high-volume mail infrastructure, and write the systems plumbing under AI products. Based in Karachi, about three years in, and happiest when the problem is below the framework layer: memory, connections, queues, and the failure paths that only show up under load.
 
-Some highlights of my work:
+**Open to work.** Fully remote, working Gulf (GMT+4) and European hours, through an EOR or as a contractor. Also open to relocating where the employer sponsors the visa. [Resume (PDF)](/resume.pdf) · [GitHub](https://github.com/Sarb0z) · [LinkedIn](https://www.linkedin.com/in/abdul-rafay-zahid)
 
-- Shipped an enterprise networking solution to customers with tens of millions of users
-- Revamped food delivery platform with real-time tracking, GenAI-powered dietary tagging, and complex payment infrastructure
-- Designed and developed sophisticated recommendation system in NextJS leveraging RAG architecture and OpenAI embeddings to analyze user profiles and match them with optimal scholarships and colleges
+Three things I have shipped:
+
+- **A C++ TLS WebSocket gateway taken from 200 to 5,000 concurrent clients.** Replaced blocking polling, pooled connections, batched Arena requests, and initialized Arena memory up front. Then stress-tested it past normal traffic and fixed what only broke there, including a log-rotation race that crashed a worker thread.
+- **Enterprise email infrastructure sending 200K+ emails a day across 1,000+ domains, built solo.** A campaign engine on KumoMTA and Amazon SES edge nodes, automated SPF/DKIM/DMARC lifecycle, Redis-locked warmup, blacklist monitoring, bi-directional Salesforce sync. It beat the Salesforce tool it replaced on response rates.
+- **[Colloid Swarm](https://github.com/Sarb0Z/colloid-swarm), a portable multi-agent engineering harness** now used company-wide by roughly 50 engineers. Seven delegating personas across three cost tiers, hostile review as an independent gate, one engine-neutral layer with thin adapters for Claude Code, Codex, Kimi, and Copilot.
 
 ### Tech Stack I'm familiar with:
 
 <FamiliarTechStack />
 
+Plus the parts without a logo: networking and concurrency, event-driven architecture, SMTP/MTA and deliverability infrastructure, Rust (learning by building), Terraform, NestJS, LangGraph, MCP, OpenCV, Cython, Playwright.
+
 ### Professional Experience 💼
 
-I've had the opportunity to work across diverse roles in software engineering, from building scalable web platforms to architecting AI-powered systems. Currently at **Softaims**, I work on full-stack development with NextJS and FastAPI, building recommendation systems with RAG architecture and LLM-powered feedback tools. Previously at **Ebryx**, I focused on systems programming in C++ and Python, optimizing networking components and re-architecting policy engines for a zero-trust security platform. I also built data pipeline infrastructure for dynamically assessing risk scores, integrating ML models to analyze access patterns using Kafka streams. I've also contributed to projects involving OCR pipelines, ElasticSearch integration, and cloud deployments with Docker and Kubernetes during my time at **Active Takeoff**, **Systems Limited**, and **PITB**.
+Currently a Software Engineer at **Softaims**, where the work has ranged from the email platform above to a voice onboarding agent on ElevenLabs Conversational AI whose backend keeps conversation state in a slot-walk, so the whole interview script replays offline without a live call, with scoped tool tokens, signed webhooks, and exactly-once writes. Also a LangChain deep-research agent framework, a RAG recommendation system on OpenAI embeddings, and Playwright scraping infrastructure collecting 10,000+ records a day from 50+ sources.
+
+Before that, at **Ebryx**, I worked on a zero-trust network access platform in C++ and Python: the gateway scale-up, an auto-update migration system for a multi-tenancy move, a ZTNA component ported from x86-64 to ARM for on-prem deployment, MySQL pooling rewritten with RAII, policy evaluation re-architected from cron to event-driven (29% less redundant database load), and a Kafka pipeline scoring network-agent risk for both ML training and live inference.
+
+Earlier, OCR and Elasticsearch work at **Active Takeoff**, and internships at **Systems Limited** and **PITB**. The full timeline is on the [Experience](/experience) page.
 
 ### Education 🎓
 
@@ -35,21 +42,21 @@ I've had the opportunity to work across diverse roles in software engineering, f
 
 - @ `FAST NUCES`, Lahore, Pakistan
 - Coursework includes:
-  - Information Retrieval
+  - Artificial Intelligence
   - Computer Vision
   - Parallel and Distributed Computing
   - Advanced Database Concepts
 
-  For my Final Year Project, I developed an **Emotion Recognition System** utilizing `PyTorch` and `OpenCV`. The project applied computer vision concepts including facial detection, feature extraction, and deep learning-based classification to identify human emotions from video streams in real-time.
+  For my Final Year Project I built a real-time computer vision pipeline in `OpenCV` that scores how well a user mimics a facial expression, on top of an emotion-recognition CNN trained from scratch on the 28,709-image FER2013 training set and exported to ONNX for on-device inference inside a Unity game. The write-up is [here](/blog/gamified-asd-intervention).
 
 #### Leadership Experience 🎯
 
-**Softec, FAST NUCES** — Deputy Head of Conferences 2022
+**Softec, FAST NUCES**, Deputy Head of Conferences 2022
 
 - Hosted the largest tech conference in Pakistan, liaising with industry leaders
 - Delegated and managed a large team of volunteers and staff members for the duration of the event
 
-**World Affairs Society, Karachi Grammar School** — Founder and President
+**World Affairs Society, Karachi Grammar School**, Founder and President
 
 - Initiated and established the society, launching its flagship event, Renaissance 19
 - Coordinated and executed plans for events, including inviting speakers and managing logistics

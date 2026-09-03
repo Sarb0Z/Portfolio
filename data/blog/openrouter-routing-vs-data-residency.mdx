@@ -1,0 +1,37 @@
+---
+title: 'OpenRouter load balancing vs. data residency: three config keys I had never set'
+date: '2026-08-04'
+tags: ['LLM Infrastructure', 'Data Residency', 'OpenRouter']
+draft: false
+summary: 'Letting a router pick the cheapest healthy provider for an open-weights model is a good uptime decision and a silent jurisdiction decision. What I found when a customer asked which country processes their data.'
+authors: ['sarbz']
+layout: PostSimple
+---
+
+_First posted on LinkedIn on 4 August 2026. The provider prices quoted below were pulled that day and move constantly; the "cheapest US-hosted" figure used provider identity as a proxy for serving region. Re-check both before relying on them._
+
+Got asked on a call which country processes a given customer's data, and I said I'd get back to them, which is the polite way of saying I had no idea.
+
+I run open-weights models through OpenRouter and let it load balance across providers rather than pinning one, which is deliberate, because uptime across the providers serving a single DeepSeek model runs from 72% to 99.98% right now and pinning the wrong one means you eat all of that yourself.
+
+I'd never looked at it from that angle until that call.
+
+The problem is retention, training and jurisdiction are all per-provider, so the same weights served by two different companies genuinely give you different answers on all three, and the router is picking whoever's cheap and healthy at that moment without caring about any of it.
+
+The numbers turned out worse than I assumed. V4 Pro is served by 18 providers on identical weights, cheapest is $0.435 per million input and the most expensive is $1.74, so 4x for the same model, and the cheap one is DeepSeek's own endpoint while the cheapest US-hosted option sits around $1.30, so keeping it US-hosted costs about 3x.
+
+It's three config keys to fix.
+
+```yaml
+data_collection: 'deny'
+zdr: true
+only: [...]
+```
+
+Set those once and sort can still chase price or throughput inside whatever's left over.
+
+I hadn't set any of them. The default worked fine for months so I never went looking.
+
+The bit I still haven't worked out is that the company listed as the provider isn't necessarily the region your request actually ran in.
+
+Anyone solved that properly?

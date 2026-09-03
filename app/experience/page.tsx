@@ -28,8 +28,8 @@ export default function ExperiencePage() {
             <span className="absolute inset-0 bg-gradient-to-r from-violet-400/20 via-pink-400/20 to-blue-400/20 blur-2xl -z-10" />
           </h1>
           <p className="mt-4 text-lg text-slate-300 max-w-2xl relative z-10">
-            Shipped an enterprise networking solution to customers with tens of millions of users.
-            Here&apos;s my journey through the tech cosmos.
+            Scaled a C++ gateway 25x, built email infrastructure that sends 200K+ a day, and shipped
+            a multi-agent harness 50 engineers use. Here&apos;s the path so far.
           </p>
 
           {/* Decorative line */}

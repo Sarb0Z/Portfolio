@@ -1,0 +1,25 @@
+---
+title: 'Two of my four blocklist checks had been silently failing for days'
+date: '2026-07-30'
+tags: ['Observability', 'Email Infrastructure', 'Postmortem']
+draft: false
+summary: 'Instrumenting a system is most of the work. Surfacing what it records is the remaining 20%, and that is where almost all the value lives. A short postmortem from running 200K+ sends a day.'
+authors: ['sarbz']
+layout: PostSimple
+---
+
+_First posted on LinkedIn on 30 July 2026._
+
+Two of the four DNS blocklists I check against had been silently failing for days. The other two kept working, so nothing looked wrong.
+
+Having built out the infrastructure, I'd been acting as a forward deployed engineer on a sales tool doing 200K+ sends a day across 1,000+ domains. Turns out the basic hygiene checks on domains hadn't actually been doing their job.
+
+My heart almost gave out, and I only found it because I was chasing a completely unrelated bug. Nothing in Sentry, no alert in our reporting channels.
+
+Tracing the actual issue took minutes once I started looking, because I built the audit trail on this thing to be airtight. The problem was I hadn't built anything that reads it.
+
+Instrumenting a system properly is already most of the work. Intelligently surfacing it is the 20% remaining, but it's where almost all the value lives because otherwise what you've built is a very detailed record of a disaster you didn't catch in time.
+
+Integrations will often silently fail or change under you so even something tested thoroughly can misbehave later without a single line of code changing. That's why it's so important that you lock down all the ways it's supposed to behave and then alert on deviation from that baseline instead of waiting for something to throw.
+
+I keep coming back to this because mitigating this properly is genuinely tricky. If you've read something good on alerting for anomalies rather than errors, please send it to me.

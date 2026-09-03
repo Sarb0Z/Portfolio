@@ -1,23 +1,24 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: "Abdul Rafay's Blog",
+  title: 'Abdul Rafay Zahid',
   author: 'Abdul Rafay Zahid',
-  headerTitle: "Abdul Rafay's Blog",
-  description: 'Exploring Tech and more',
+  headerTitle: 'Abdul Rafay Zahid',
+  description:
+    'Backend and systems engineer. C++ network gateways, high-volume mail infrastructure, and the plumbing under AI products.',
   language: 'en-us',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://www.abdulrafayzahid.dev',
   siteRepo: 'https://github.com/Sarb0z/Portfolio',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
-  email: 'abdulrafay972@gmail.com',
+  email: 'sarbzga@gmail.com',
   github: 'https://github.com/Sarb0z',
   linkedin: 'https://www.linkedin.com/in/abdul-rafay-zahid',
   locale: 'en-US',
   socialLinks: {
     github: 'https://www.github.com/Sarb0z',
     linkedin: 'https://www.linkedin.com/in/abdul-rafay-zahid',
-    mail: 'mailto:abdulrafay972@gmail.com',
+    mail: 'mailto:sarbzga@gmail.com',
   },
   analytics: {
     // If you want to use an analytics provider you have to add it to the
