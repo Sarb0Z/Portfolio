@@ -1,18 +1,38 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { useState } from 'react'
 import { ExperienceData, experienceTypeConfig } from '@/data/experienceData'
-import { LazyDevIcon, getLazyIcon } from '@/components/LazyDevIcon'
-import { cn } from '@/lib/utils'
+import Link from '@/components/Link'
 
 interface ExperienceCardProps {
   experience: ExperienceData
-  position: 'left' | 'right'
-  index: number
 }
 
-// Parse text with [url] syntax into JSX with links
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+
+// "June 2024" -> "2024-06"; missing or "Present" -> "now"
+function yearMonth(value?: string) {
+  if (!value || value === 'Present') return 'now'
+  const [month, year] = value.split(' ')
+  const index = MONTHS.indexOf(month)
+  if (index === -1 || !year) return value
+  return `${year}-${String(index + 1).padStart(2, '0')}`
+}
+
+// Parse text with [url] syntax into JSX, rendering the captured URL as a small arrow link
 function parseLinksInText(text: string) {
   const urlRegex = /\[([^\]]+)\]/g
   const parts = text.split(urlRegex)
@@ -26,7 +46,7 @@ function parseLinksInText(text: string) {
           href={part}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-violet-400 hover:text-violet-300 underline underline-offset-2"
+          className="text-muted transition-colors hover:text-accent"
         >
           ↗
         </a>
@@ -36,169 +56,56 @@ function parseLinksInText(text: string) {
   })
 }
 
-export function ExperienceCard({ experience, position, index }: ExperienceCardProps) {
+export function ExperienceCard({ experience }: ExperienceCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const prefersReducedMotion = useReducedMotion()
 
   const config = experienceTypeConfig[experience.type]
-  const showExpandButton = experience.achievements.length > 3
+  const showToggle = experience.achievements.length > 3
   const visibleAchievements = isExpanded
     ? experience.achievements
     : experience.achievements.slice(0, 3)
-
-  // Animation variants
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      x: prefersReducedMotion ? 0 : position === 'left' ? -50 : 50,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.25, 0.1, 0.25, 1] as const,
-      },
-    },
-  }
-
-  const listVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3 },
-    },
-  }
+  const dateRange = `${yearMonth(experience.startDate)} to ${yearMonth(experience.endDate)}`
 
   return (
-    <motion.div
-      ref={ref}
-      variants={cardVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      className={cn('w-full max-w-lg', position === 'left' ? 'mr-auto' : 'ml-auto')}
-    >
-      <div
-        className={cn(
-          'relative p-6 rounded-2xl',
-          'bg-cosmic-800/60 backdrop-blur-md',
-          'border border-white/10',
-          config.accentColor,
-          'shadow-glow-md hover:shadow-glow-lg transition-shadow duration-300'
+    <div className="grid gap-4 border-t hairline py-10 md:grid-cols-[11rem_1fr] md:gap-10">
+      <div className="flex flex-col gap-2 md:sticky md:top-28 md:self-start">
+        <span className="font-mono text-xs tabular-nums text-ink">{dateRange}</span>
+        <span className="font-mono text-xs text-muted">{config.label.toLowerCase()}</span>
+        {experience.location.toLowerCase() !== config.label.toLowerCase() && (
+          <span className="font-mono text-xs text-muted">{experience.location.toLowerCase()}</span>
         )}
-      >
-        {/* Type badge with gradient */}
-        <div
-          className={cn(
-            'absolute -top-3 left-4 px-3 py-1.5 rounded-full text-xs font-semibold',
-            config.badgeGradient,
-            'text-white shadow-lg',
-            'border border-white/20'
-          )}
-        >
-          <span className="drop-shadow-sm">{config.label}</span>
-        </div>
+      </div>
 
-        {/* Header */}
-        <div className="mt-2 mb-4">
-          <h3 className="text-xl font-bold text-starlight">{experience.title}</h3>
-          <div className="flex items-center gap-2 mt-1">
-            {experience.href ? (
-              <a
-                href={experience.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-violet-400 hover:text-violet-300 font-medium"
-              >
-                {experience.company} ↗
-              </a>
-            ) : (
-              <span className="text-starlight-dim font-medium">{experience.company}</span>
-            )}
-            <span className="text-starlight-dim">•</span>
-            <span className="text-starlight-dim">{experience.location}</span>
-          </div>
-          <p className="text-sm text-starlight-dim mt-1">
-            {experience.startDate} — {experience.endDate || 'Present'}
-          </p>
-        </div>
+      <div>
+        <h2 className="display text-2xl md:text-3xl">{experience.title}</h2>
+        {experience.href ? (
+          <Link href={experience.href} className="link-underline text-muted">
+            {experience.company}
+          </Link>
+        ) : (
+          <p className="text-muted">{experience.company}</p>
+        )}
 
-        {/* Achievements */}
-        <motion.ul
-          variants={listVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="space-y-2 mb-4"
-        >
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-ink/85 marker:text-muted">
           {visibleAchievements.map((achievement, i) => (
-            <motion.li
-              key={i}
-              variants={itemVariants}
-              className="flex items-start gap-2 text-sm text-starlight/80"
-            >
-              <span
-                className={cn(
-                  'mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0',
-                  config.textColor.replace('text-', 'bg-')
-                )}
-              />
-              <span>{parseLinksInText(achievement)}</span>
-            </motion.li>
+            <li key={i}>{parseLinksInText(achievement)}</li>
           ))}
-        </motion.ul>
+        </ul>
 
-        {/* Expand button */}
-        {showExpandButton && (
+        {showToggle && (
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={cn(
-              'text-sm font-medium mb-4',
-              config.textColor,
-              'hover:underline underline-offset-2'
-            )}
+            type="button"
+            onClick={() => setIsExpanded((prev) => !prev)}
+            className="mt-3 font-mono text-xs text-accent underline-offset-4 hover:underline"
           >
-            {isExpanded ? 'Show less' : `Show ${experience.achievements.length - 3} more`}
+            {isExpanded ? '- show less' : `+ ${experience.achievements.length - 3} more`}
           </button>
         )}
 
-        {/* Tech stack */}
-        <div className="flex flex-wrap gap-2">
-          {experience.techStack.map((tech) => {
-            const hasIcon = getLazyIcon(tech) !== null
-            return hasIcon ? (
-              <div
-                key={tech}
-                className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-cosmic-700/50 text-xs text-starlight-dim"
-              >
-                <LazyDevIcon name={tech} />
-                <span>{tech}</span>
-              </div>
-            ) : (
-              <div
-                key={tech}
-                className="px-2 py-1 rounded-md bg-cosmic-700/50 text-xs text-starlight-dim"
-              >
-                {tech}
-              </div>
-            )
-          })}
-        </div>
+        <p className="mt-4 font-mono text-xs text-muted">
+          stack: {experience.techStack.join(', ')}
+        </p>
       </div>
-    </motion.div>
+    </div>
   )
 }

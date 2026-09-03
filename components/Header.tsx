@@ -7,112 +7,56 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 const Header = () => {
   const pathname = usePathname()
-  const isExperiencePage = pathname === '/experience' || pathname === '/experience/'
-  const openToWork = true
 
   return (
-    <>
-      {/* Desktop Navigation */}
-      <nav
-        className={`z-50 top-0 left-0 right-0 h-14 md:h-[4.1rem] border-b fixed w-full backdrop-blur hidden md:block ${
-          isExperiencePage
-            ? 'bg-[#0a0a1a]/90 border-white/10 text-white'
-            : 'supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60 bg-white/95 dark:bg-gray-950/95 border-gray-200 dark:border-gray-800'
-        }`}
-      >
-        <div className="flex items-center justify-between h-full p-4 max-w-[95rem] mx-auto">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              aria-label={siteMetadata.headerTitle}
-              className="text-3xl font-semibold tracking-wider md:text-4xl font-fuggles"
-            >
-              <span
-                className={`text-5xl bg-clip-text text-transparent md:text-6xl ${
-                  isExperiencePage
-                    ? 'bg-gradient-to-r from-violet-400 to-pink-400'
-                    : 'bg-gradient-to-r from-primary-500 to-gray-400'
-                }`}
-              >
-                S
-              </span>
-              arbz
-            </Link>
-            {openToWork && (
-              <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-xl px-2 gap-3">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500" />
-                </span>
-                <a href={`mailto:${siteMetadata.email}`} className="text-sm">
-                  Open to work
-                </a>
-              </div>
-            )}
-          </div>
-          <div className="flex space-x-4 items-center">
-            <ul className="flex items-center">
-              {headerNavLinks
-                .filter((link) => link.href !== '/')
-                .map((link) => (
-                  <li key={link.title}>
-                    <Link
-                      href={link.href}
-                      className={`relative inline-block px-3 py-1 text-lg tracking-wider rounded-lg group hover:bg-gray-200 dark:hover:bg-gray-800 ${
-                        isExperiencePage ? 'text-white' : ''
-                      }`}
-                    >
-                      <span
-                        className={`absolute rounded-full -bottom-1 left-1/2 transform -translate-x-1/2 w-4 h-[3px] bg-black dark:bg-white opacity-0 group-hover:opacity-100 transition-opacity ${
-                          pathname.startsWith(link.href) ? 'opacity-100' : ''
-                        }`}
-                      />
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-            <SearchButton />
-            <ThemeSwitch />
-          </div>
-        </div>
-      </nav>
+    <header className="fixed inset-x-0 top-0 z-50 border-b hairline bg-paper/80 backdrop-blur supports-[backdrop-filter]:bg-paper/70">
+      <div className="mx-auto flex h-16 w-full max-w-site items-center justify-between px-5 md:px-8">
+        <Link href="/" aria-label={siteMetadata.headerTitle} className="flex items-baseline gap-3">
+          <span className="display text-xl leading-none sm:text-2xl">Abdul Rafay Zahid</span>
+          <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-muted lg:inline">
+            Backend &amp; systems
+          </span>
+        </Link>
 
-      {/* Mobile Navigation */}
-      <nav
-        className={`z-50 top-0 left-0 right-0 h-14 border-b fixed w-full backdrop-blur md:hidden ${
-          isExperiencePage
-            ? 'bg-[#0a0a1a]/90 border-white/10 text-white'
-            : 'supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60 bg-white/95 dark:bg-gray-950/95 border-gray-200 dark:border-gray-800'
-        }`}
-      >
-        <div className="flex items-center justify-between h-full px-4 mx-auto">
-          <Link
-            href="/"
-            aria-label={siteMetadata.headerTitle}
-            className="text-3xl font-semibold tracking-wider font-fuggles"
-          >
-            <span
-              className={`text-5xl bg-clip-text text-transparent ${
-                isExperiencePage
-                  ? 'bg-gradient-to-r from-violet-400 to-pink-400'
-                  : 'bg-gradient-to-r from-primary-500 to-gray-400'
-              }`}
-            >
-              S
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+          {headerNavLinks
+            .filter((link) => link.href !== '/')
+            .map((link) => {
+              const active = pathname === link.href || pathname.startsWith(`${link.href}/`)
+              return (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  className={cn(
+                    'rounded-full px-3 py-1.5 text-sm transition-colors hover:text-accent',
+                    active ? 'bg-line/10 text-ink' : 'text-muted'
+                  )}
+                >
+                  {link.title}
+                </Link>
+              )
+            })}
+          <div className="ml-3 flex items-center gap-1 border-l hairline pl-3 text-muted">
+            <SearchButton />
+            <span className="[&>button]:rounded-full [&>button]:p-2 [&>button]:transition-colors [&>button:hover]:text-accent [&_svg]:h-[18px] [&_svg]:w-[18px]">
+              <ThemeSwitch />
             </span>
-            arbz
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeSwitch />
-            <MobileNav isExperiencePage={isExperiencePage} />
           </div>
+        </nav>
+
+        <div className="flex items-center gap-1 md:hidden">
+          <SearchButton showHint={false} />
+          <span className="[&>button]:rounded-full [&>button]:p-2 [&_svg]:h-[18px] [&_svg]:w-[18px]">
+            <ThemeSwitch />
+          </span>
+          <MobileNav />
         </div>
-      </nav>
-    </>
+      </div>
+    </header>
   )
 }
 

@@ -1,12 +1,8 @@
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
 import { Metadata } from 'next'
 
-import { BookmarkList } from '@/components/bookmark-list'
-import { FloatingHeader } from '@/components/floating-header'
-import { PageTitle } from '@/components/page-title'
-import { ScreenLoadingSpinner } from '@/components/screen-loading-spinner'
-import { ScrollArea } from '@/components/scroll-area'
+import PageTitle from '@/components/PageTitle'
+import { ArrowLink, Eyebrow } from '@/components/design'
 import {
   getBookmarkItems,
   getBookmarks,
@@ -57,27 +53,48 @@ async function fetchData(slug: string): Promise<{
 export default async function CollectionPage({ params }: PageProps) {
   const { slug } = params
   const { currentBookmark, bookmarkItems } = await fetchData(slug)
+  const items = bookmarkItems?.items || []
 
   return (
-    <ScrollArea className="h-full bg-white dark:bg-gray-950" useScrollAreaId>
-      {/* Mobile header - hidden on desktop since we have sidebar */}
-      <FloatingHeader scrollTitle={currentBookmark.title} goBackLink="/bookmarks" />
-
-      <div className="@container p-4 md:p-6 lg:p-8">
-        {/* Page title - visible on all sizes but styled differently */}
-        <div className="mb-6 lg:mb-8">
-          <PageTitle title={currentBookmark.title} className="text-xl lg:text-2xl" />
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            {currentBookmark.count} {currentBookmark.count === 1 ? 'bookmark' : 'bookmarks'} in this
-            collection
-          </p>
-        </div>
-
-        <Suspense fallback={<ScreenLoadingSpinner />}>
-          <BookmarkList id={currentBookmark._id} initialData={bookmarkItems} />
-        </Suspense>
+    <div className="max-w-prose">
+      <div className="space-y-3 pb-10 pt-6">
+        <Eyebrow>Bookmarks</Eyebrow>
+        <PageTitle>{currentBookmark.title}</PageTitle>
+        <p className="max-w-prose text-muted">
+          {currentBookmark.count} {currentBookmark.count === 1 ? 'link' : 'links'} in this
+          collection
+        </p>
       </div>
-    </ScrollArea>
+
+      <ul>
+        {items.map((item) => (
+          <li key={item._id}>
+            <div className="space-y-1.5 border-t hairline py-4">
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[15px] font-medium hover:text-accent"
+              >
+                {item.title}
+              </a>
+              <p className="font-mono text-xs text-muted">
+                {item.domain}
+                {item.domain && ' · '}
+                {item.created.slice(0, 10)}
+              </p>
+              {(item.excerpt || item.note) && (
+                <p className="text-sm text-muted">{item.excerpt || item.note}</p>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div className="border-t hairline pt-6">
+        <ArrowLink href="/bookmarks">Back to bookmarks</ArrowLink>
+      </div>
+    </div>
   )
 }
 

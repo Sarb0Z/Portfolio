@@ -43,21 +43,17 @@ const Pre = (props) => {
       ref={textInput}
       onMouseEnter={onEnter}
       onMouseLeave={onExit}
-      className="relative bg-black rounded-lg"
+      className="relative rounded-lg"
     >
       <button
         aria-label="Copy code"
         type="button"
         className={`absolute z-10 right-0 top-[2px] h-8 w-8 ring-0 rounded bg-transparent ${
-          copied ? 'border-green-400 focus:border-green-400 focus:outline-none' : 'border-gray-300'
+          copied ? 'text-accent' : 'text-muted hover:text-ink'
         }`}
         onClick={onCopy}
       >
-        {copied ? (
-          <CopyCheck size={20} className={copied ? 'text-green-400' : 'text-white'} />
-        ) : (
-          <Copy size={20} className={copied ? 'text-green-400' : 'text-white'} />
-        )}
+        {copied ? <CopyCheck size={18} /> : <Copy size={18} />}
       </button>
       <ToastContainer
         position="top-right"

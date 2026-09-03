@@ -48,7 +48,7 @@ const TOCInline = ({
           key={heading.value}
           className={`${heading.depth >= indentDepth && 'ml-8'} leading-normal`}
         >
-          <a href={heading.url} className="text-blue-600 dark:text-sky-500 no-underline">
+          <a href={heading.url} className="link-underline">
             {heading.value}
           </a>
         </li>
@@ -59,10 +59,8 @@ const TOCInline = ({
   return (
     <div>
       {asDisclosure ? (
-        <details open className="bg-gray-200 dark:bg-zinc-800/95 rounded-lg py-2">
-          <summary className="ml-3 text-lg lg:text-xl font-bold cursor-pointer">
-            Table of Contents
-          </summary>
+        <details open className="rounded-lg border hairline bg-surface py-2">
+          <summary className="eyebrow ml-3 cursor-pointer">Contents</summary>
           <div className="ml-2 -mb-6 -mt-4">{tocList}</div>
         </details>
       ) : (

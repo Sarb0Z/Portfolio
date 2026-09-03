@@ -1,7 +1,9 @@
 import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
-import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
+import Link from '@/components/Link'
+import PageTitle from '@/components/PageTitle'
+import { Eyebrow, FactList } from '@/components/design'
 
 interface Props {
   children: ReactNode
@@ -9,42 +11,68 @@ interface Props {
 }
 
 export default function AuthorLayout({ children, content }: Props) {
-  const { name, avatar, occupation, company, email, twitter, linkedin, github } = content
+  const { name, avatar, occupation, company, email, linkedin, github } = content
 
   return (
-    <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            About
-          </h1>
+    <div>
+      <div className="rise max-w-3xl pb-12">
+        <Eyebrow>About</Eyebrow>
+        <div className="mt-3">
+          <PageTitle>{name}</PageTitle>
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-          <div className="flex flex-col items-start pt-8 xl:sticky xl:top-0">
+        <p className="mt-4 text-lg text-muted">
+          {occupation}
+          {company ? `, ${company}` : ''}
+        </p>
+      </div>
+      <div className="grid gap-12 border-t hairline pt-10 lg:grid-cols-12">
+        <aside className="lg:col-span-4">
+          <div className="lg:sticky lg:top-28">
             {avatar && (
               <Image
                 src={avatar}
-                alt="avatar"
-                width={192}
-                height={192}
-                className="h-48 w-48 rounded-full"
+                alt={name}
+                width={894}
+                height={974}
+                className="w-full max-w-xs rounded-lg border hairline grayscale transition duration-500 hover:grayscale-0"
               />
             )}
-            <h3 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">{name}</h3>
-            <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
-            <div className="text-gray-500 dark:text-gray-400">{company}</div>
-            <div className="flex space-x-3 pt-6">
-              <SocialIcon kind="mail" href={`mailto:${email}`} />
-              <SocialIcon kind="github" href={github} />
-              <SocialIcon kind="linkedin" href={linkedin} />
-              <SocialIcon kind="twitter" href={twitter} />
-            </div>
+            <FactList
+              className="mt-6 max-w-xs"
+              items={[
+                ['base', 'Karachi, Pakistan, UTC+5'],
+                ['hours', 'Gulf (GMT+4) and EU mornings'],
+                ['open to', 'remote via EOR or contract, sponsored relocation'],
+                ['degree', 'BS Computer Science, FAST NUCES, 2024'],
+                ['experience', 'about three years'],
+              ]}
+            />
+            <ul className="mt-6 space-y-2 text-sm">
+              <li>
+                <a href="/resume.pdf" className="link-underline">
+                  Resume (PDF)
+                </a>
+              </li>
+              <li>
+                <Link href={github ?? ''} className="link-underline">
+                  GitHub
+                </Link>
+              </li>
+              <li>
+                <Link href={linkedin ?? ''} className="link-underline">
+                  LinkedIn
+                </Link>
+              </li>
+              <li>
+                <a href={`mailto:${email}`} className="link-underline">
+                  {email}
+                </a>
+              </li>
+            </ul>
           </div>
-          <div className="prose max-w-none pb-8 pt-8 dark:prose-invert xl:col-span-2">
-            {children}
-          </div>
-        </div>
+        </aside>
+        <div className="prose dark:prose-invert lg:col-span-8">{children}</div>
       </div>
-    </>
+    </div>
   )
 }

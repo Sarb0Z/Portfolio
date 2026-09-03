@@ -21,9 +21,7 @@ function CImage({ src, caption, width = 1200, height = 630 }: CImageProps) {
         className="w-full h-auto"
         style={{ width: '100%', height: 'auto' }}
       />
-      <figcaption className="text-center -mt-6 font-bold dark:text-gray-100/95">
-        {caption}
-      </figcaption>
+      <figcaption className="-mt-4 text-center font-mono text-xs text-muted">{caption}</figcaption>
     </div>
   )
 }

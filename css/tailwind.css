@@ -2,92 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
-p {
-  @apply text-black dark:text-gray-300 text-base md:text-lg leading-relaxed lg:leading-loose;
+/* Design tokens. RGB triplets so Tailwind can apply alpha. */
+:root {
+  --paper: 250 249 246;
+  --surface: 255 255 255;
+  --ink: 22 21 19;
+  --muted: 108 104 97;
+  --line: 22 21 19;
+  --accent: 208 70 20;
+  --accent-ink: 255 255 255;
 }
 
-img {
-  @apply rounded-lg shadow-xl dark:shadow-none;
+.dark {
+  --paper: 11 11 12;
+  --surface: 20 20 22;
+  --ink: 236 234 228;
+  --muted: 152 149 142;
+  --line: 236 234 228;
+  --accent: 255 128 42;
+  --accent-ink: 11 11 12;
 }
 
-code {
-  @apply dark:text-green-400 rounded-md dark:bg-zinc-700;
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper text-ink;
+  }
+  ::selection {
+    @apply bg-accent/30;
+  }
+  a,
+  button {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
-ul,
-li {
-  @apply text-black dark:text-gray-300 text-base md:text-lg leading-relaxed lg:leading-loose;
+@layer components {
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted;
+  }
+  .hairline {
+    @apply border-line/15;
+  }
+  .display {
+    @apply font-serif tracking-[-0.01em];
+  }
+  .link-underline {
+    @apply underline decoration-line/30 underline-offset-[5px] transition-colors hover:decoration-accent;
+  }
+  .kbd {
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded border border-line/20 bg-paper px-1 font-mono text-[10px] leading-none text-muted;
+  }
+}
+
+/* Native disclosure rows (the project log) */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Prose: a quieter reading column than the plugin default */
+.prose {
+  --tw-prose-links: rgb(var(--ink));
+}
+.prose a {
+  @apply font-normal underline decoration-line/30 underline-offset-[5px] hover:decoration-accent;
+}
+.prose code {
+  @apply rounded bg-line/10 px-1 py-0.5 font-mono text-[0.9em] font-normal;
+}
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+.prose pre {
+  @apply rounded-lg border hairline bg-surface;
+}
+.prose pre code {
+  @apply bg-transparent p-0;
+}
+.prose img {
+  @apply rounded-lg border hairline;
+}
+.prose h2,
+.prose h3 {
+  @apply font-serif font-normal tracking-[-0.01em];
+}
+.prose blockquote {
+  @apply border-l-2 border-accent font-serif not-italic text-ink;
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
-
 pre {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-.wave {
-  animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
-  animation-duration: 2.5s; /* Change to speed up or slow down */
-  animation-iteration-count: infinite; /* Never stop waving :) */
-  transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
-  display: inline-block;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-@keyframes wave-animation {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(14deg);
-  } /* The following five values can be played with to make the waving more or less extreme */
-  20% {
-    transform: rotate(-8deg);
-  }
-  30% {
-    transform: rotate(14deg);
-  }
-  40% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  60% {
-    transform: rotate(0deg);
-  } /* Reset for the last half to pause */
-  100% {
-    transform: rotate(0deg);
-  }
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
 }
 
 .task-list-item::before {
   @apply hidden;
 }
-
 .task-list-item {
   @apply list-none;
 }
-
 .footnotes {
-  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+  @apply mt-12 border-t hairline pt-8;
 }
-
 .data-footnote-backref {
   @apply no-underline;
 }
-
 .csl-entry {
   @apply my-5;
 }
 
-/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition:
@@ -95,12 +140,22 @@ input:-webkit-autofill:focus {
     color 600000s 0s;
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Soft reveal used by the home page sections */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overflow-y: scroll;
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
 }

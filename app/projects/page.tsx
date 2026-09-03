@@ -1,37 +1,32 @@
 import projectsData from '@/data/projectsData'
-import Card from '@/components/Card'
+import { ProjectLog } from '@/components/ProjectRow'
+import PageTitle from '@/components/PageTitle'
+import { Eyebrow } from '@/components/design'
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Projects' })
+export const metadata = genPageMetadata({
+  title: 'Work',
+  description: 'Selected systems, infrastructure, and side projects by Abdul Rafay Zahid.',
+})
 
 export default function Projects() {
+  const featuredIds = projectsData.filter((p) => p.featured).map((p) => p.id)
   return (
     <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Projects
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            I like to build things. Here are some of the things I've built.
-          </p>
+      <div className="rise max-w-3xl pb-12">
+        <Eyebrow>Work</Eyebrow>
+        <div className="mt-3">
+          <PageTitle>Things that had to hold up</PageTitle>
         </div>
-        <div className="py-5">
-          <div className="flex flex-wrap justify-center gap-8">
-            {projectsData.map((d, index) => (
-              <Card
-                key={d.title}
-                title={d.title}
-                description={d.description}
-                imgSrc={d.imgSrc}
-                href={d.href}
-                techStack={d.techStack}
-                priority={index === 0}
-              />
-            ))}
-          </div>
-        </div>
+        <p className="mt-5 text-lg text-muted">
+          A gateway that took 25x its original load, an email platform built alone, and the smaller
+          pieces that taught me the rest. Hardest and lowest-level first.
+        </p>
+        <p className="mt-4 font-mono text-xs text-muted">
+          {projectsData.length} entries. Click a row to expand it.
+        </p>
       </div>
+      <ProjectLog projects={projectsData} openIds={featuredIds} />
     </>
   )
 }
